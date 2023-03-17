@@ -1,9 +1,11 @@
 package com.danielwindel.users;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -16,13 +18,21 @@ class UserControllerTest {
     @Autowired
     MockMvc mockMvc;
 
+    ObjectMapper mapper = new ObjectMapper();
+    User testUser = new User("test_email_address");
+
     @Test
     @DirtiesContext
-    void AddUserEndpointReturnsStatusOk() throws Exception{
+    void AddUserEndpointReturnsAddedUser() throws Exception {
+        String testUserJson = mapper.writeValueAsString(testUser);
+
         mockMvc.perform(MockMvcRequestBuilders
-                .post("/api/users/add"))
+                        .post("/api/users/add")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(testUserJson))
                 .andExpect(MockMvcResultMatchers.status()
-                        .isOk());
+                        .isOk())
+                .andExpect(MockMvcResultMatchers.content().json(testUserJson));
     }
 
 }

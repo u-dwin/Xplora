@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     @PostMapping("/add")
-        public void addUser() {
-        //left empty to test status of endpoint
-        }
+    public void addUser() {
+        //intentionally left empty for status test
+    }
 
 }
