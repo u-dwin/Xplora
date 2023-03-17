@@ -11,7 +11,7 @@ class UserServiceTest {
     UserRepository userRepository = mock(UserRepository.class);
     UserService userService = new UserService(userRepository);
 
-    User testUser = new User("test_user_email");
+    User testUser = new User("1", "test_user_email");
 
 
     @Test

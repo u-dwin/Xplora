@@ -8,9 +8,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/users")
 public class UserController {
 
+    private final UserService userService;
+
+    UserController(UserService userService) {
+        this.userService = userService;
+    }
+
     @PostMapping("/add")
-    public void addUser() {
-        //intentionally left empty for status test
+    public User addUser(User user) {
+        userService.addUser(user);
+        return userService.addUser(user);
     }
 
 }

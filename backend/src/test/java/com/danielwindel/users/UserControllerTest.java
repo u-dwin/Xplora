@@ -11,6 +11,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -19,7 +21,7 @@ class UserControllerTest {
     MockMvc mockMvc;
 
     ObjectMapper mapper = new ObjectMapper();
-    User testUser = new User("test_email_address");
+    User testUser = new User("1", "test_email_address");
 
     @Test
     @DirtiesContext
@@ -31,8 +33,8 @@ class UserControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(testUserJson))
                 .andExpect(MockMvcResultMatchers.status()
-                        .isOk())
-                .andExpect(MockMvcResultMatchers.content().json(testUserJson));
+                        .isOk()).
+                andExpect(content().json(testUserJson));
     }
 
 }
