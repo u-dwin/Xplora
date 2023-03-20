@@ -1,6 +1,7 @@
 package com.danielwindel.users;
 
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,9 +16,9 @@ public class UserController {
     }
 
     @PostMapping("/add")
-    public User addUser(User user) {
-        userService.addUser(user);
-        return userService.addUser(user);
+    public User addUser(@RequestBody UserDTO userRequestModel) {
+        userService.addUser(userRequestModel);
+        return userService.addUser(userRequestModel);
     }
 
 }

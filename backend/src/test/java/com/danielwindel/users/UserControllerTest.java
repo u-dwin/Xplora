@@ -21,7 +21,7 @@ class UserControllerTest {
     MockMvc mockMvc;
 
     ObjectMapper mapper = new ObjectMapper();
-    User testUser = new User("1", "test_email_address");
+    UserDTO testUser = new UserDTO("test_email_address", "test_password", "Traveler");
 
     @Test
     @DirtiesContext
