@@ -1,6 +1,6 @@
 
 export type User = {
-    email: string;
-    password: string;
-    role: string;
+    userEmailAddress: string;
+    userPassword: string;
+    userType: string;
 }

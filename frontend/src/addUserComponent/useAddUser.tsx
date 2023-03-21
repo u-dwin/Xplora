@@ -3,15 +3,18 @@ import {User} from "./User";
 import {useNavigate} from "react-router-dom";
 
 export default function useAddUser() {
-    const [addUser, setAddUser] = useState<User | null>(null)
     const navigate = useNavigate();
-
+    const [addUser, setAddUser] = useState<User | null>(null)
+    const [inputFields, setInputFields] = useState({
+        email: "",
+        password: ""
+    })
 
     function travelerChoiceClick() {
         setAddUser({
-                role: "traveler",
-                email: "",
-                password: "",
+                userType: "traveler",
+                userEmailAddress: "",
+                userPassword: "",
             }
         )
         navigate("/sign-up")
@@ -19,19 +22,19 @@ export default function useAddUser() {
 
     function expertChoiceClick() {
         setAddUser({
-                role: "expert",
-                email: "",
-                password: "",
-                }
+                userType: "expert",
+                userEmailAddress: "",
+                userPassword: "",
+            }
             )
         navigate("/sign-up")
     }
 
     function registrationFormSubmit() {
         setAddUser({
-            role: addUser?.role ?? "",
-            email: "",
-            password: "",
+            userType: addUser?.userType ?? "",
+            userEmailAddress: inputFields.email,
+            userPassword: inputFields.password,
         })
     }
 
