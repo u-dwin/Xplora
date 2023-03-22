@@ -15,10 +15,18 @@ export default function SignUp() {
     } = useAddUser();
 
     return (
-        <Box sx={{textAlign: "center"}}>
+        <Box sx={{
+            textAlign: "center",
+            display: "flex",
+            flexDirection: "column",
+            flexWrap: "wrap",
+            alignContent: "space-around",
+            rowGap: "5px"
+        }}>
+            <Box> </Box>
             {addUser?.userType === "" ? (
                 <>
-                    <Typography variant={"h4"}>I am a...</Typography>
+                    <Typography variant={"h4"} justifyItems={"center"}>I am a...</Typography>
                     <Button variant="outlined" color="inherit" onClick={travelerChoiceClick}>
                         Traveler
                     </Button>
@@ -31,13 +39,21 @@ export default function SignUp() {
                     component="form"
                     onSubmit={registrationFormSubmit}
                     sx={{
-                        "& .MuiTextField-root": {m: 1, width: "25ch"},
+                        "& .MuiTextField-root": {
+                            m: 1,
+                            width: "25ch",
+                            display: "flex",
+                            flexDirection: "column",
+                            flexWrap: "wrap",
+                            rowGap: "5px",
+                            justifyContent: "center"
+                        },
                     }}
                     noValidate
                     autoComplete="off"
                 >
-                    <div>
                         <TextField
+                            size="small"
                             label="email"
                             id="outlined-size-normal"
                             value={inputFields.email}
@@ -46,18 +62,18 @@ export default function SignUp() {
                             helperText={emailError}
                         />
 
-                        <TextField
-                            label="password"
-                            id="outlined-size-normal"
-                            value={inputFields.password}
-                            onChange={handlePasswordChange}
-                            error={Boolean(passwordError)}
-                            helperText={passwordError}
-                        />
-                        <Button type="submit" variant="outlined" color="inherit">
-                            Sign Up
-                        </Button>
-                    </div>
+                    <TextField
+                        size="small"
+                        label="password"
+                        id="outlined-size-normal"
+                        value={inputFields.password}
+                        onChange={handlePasswordChange}
+                        error={Boolean(passwordError)}
+                        helperText={passwordError}
+                    />
+                    <Button type="submit" variant="outlined" color="inherit" size="medium">
+                        Sign Up
+                    </Button>
                 </Box>
             )}
         </Box>
