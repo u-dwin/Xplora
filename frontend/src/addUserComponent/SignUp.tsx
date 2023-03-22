@@ -10,6 +10,8 @@ export default function SignUp() {
         handlePasswordChange,
         inputFields,
         addUser,
+        emailError,
+        passwordError
     } = useAddUser();
 
     return (
@@ -40,12 +42,17 @@ export default function SignUp() {
                             id="outlined-size-normal"
                             value={inputFields.email}
                             onChange={handleEmailChange}
+                            error={Boolean(emailError)}
+                            helperText={emailError}
                         />
+
                         <TextField
                             label="password"
                             id="outlined-size-normal"
                             value={inputFields.password}
                             onChange={handlePasswordChange}
+                            error={Boolean(passwordError)}
+                            helperText={passwordError}
                         />
                         <Button type="submit" variant="outlined" color="inherit">
                             Sign Up
