@@ -33,7 +33,7 @@ export default function useAddUser() {
     }
 
     function validateEmail(email: string) {
-        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/i;
+        const re = /^(?=.{1,256})(?=.{1,64}@)[^@]*@[^@]*$/;
         return re.test(email);
     }
 
