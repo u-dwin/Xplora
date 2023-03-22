@@ -1,5 +1,6 @@
 import {Box, Button, TextField, Typography} from "@mui/material";
 import useAddUser from "./useAddUser";
+import logo from "../logo.png";
 
 export default function SignUp() {
     const {
@@ -23,10 +24,12 @@ export default function SignUp() {
             alignContent: "space-around",
             rowGap: "5px"
         }}>
-            <Box> </Box>
+            <Box> <img src={logo} alt="xplora_logo" width="200" height="133"/> </Box>
+            <Box sx={{height: "50px"}}></Box>
             {addUser?.userType === "" ? (
                 <>
                     <Typography variant={"h4"} justifyItems={"center"}>I am a...</Typography>
+                    <Box sx={{height: "50px"}}></Box>
                     <Button variant="outlined" color="inherit" onClick={travelerChoiceClick}>
                         Traveler
                     </Button>
