@@ -40,8 +40,8 @@ class UserServiceTest {
         when(userRepository.save(any(User.class))).
                 thenThrow(new ResponseStatusException(HttpStatus.CONFLICT));
 
-        assertThrows(ResponseStatusException.class, () -> {
-            userService.addUser(testUserDTO);
-        });
+        assertThrows(ResponseStatusException.class, () ->
+                userService.addUser(testUserDTO)
+        );
     }
 }

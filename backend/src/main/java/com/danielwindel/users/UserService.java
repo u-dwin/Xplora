@@ -25,4 +25,5 @@ public class UserService {
             throw new ResponseStatusException(HttpStatus.CONFLICT);
         }
     }
+
 }
