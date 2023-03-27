@@ -15,7 +15,9 @@ class UserServiceTest {
     UserRepository userRepository = mock(UserRepository.class);
 
     UserIdService userIdService = mock(UserIdService.class);
-    UserService userService = new UserService(userRepository, userIdService);
+
+    UserDetailsRepository userDetailsRepository = mock(UserDetailsRepository.class);
+    UserService userService = new UserService(userRepository, userIdService, userDetailsRepository);
 
     UserDTO testUserDTO = new UserDTO("test_email_address", "test_password", "Traveler");
 

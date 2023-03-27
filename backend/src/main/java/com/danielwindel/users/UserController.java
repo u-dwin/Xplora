@@ -1,9 +1,6 @@
 package com.danielwindel.users;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/users")
@@ -18,6 +15,11 @@ public class UserController {
     @PostMapping("/add")
     public User addUser(@RequestBody UserDTO userRequestModel) {
         return userService.addUser(userRequestModel);
+    }
+
+    @PutMapping("/edit-profile/{id}")
+    public UserDetails updateTour(@PathVariable String id, @RequestBody UserDetailsDTO userDetailsDTO) {
+        return userService.editUserDetails(userDetailsDTO, id);
     }
 
 }

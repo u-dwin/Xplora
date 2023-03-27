@@ -2,19 +2,12 @@ package com.danielwindel.users;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
 
-@Document("profiles")
-@NoArgsConstructor
-@Data
 @AllArgsConstructor
-public class ProfileDetails {
-    @Id
-    private String userID;
+@Data
+public class UserDetailsDTO {
     private String picture;
     private String description;
     private String firstName;
