@@ -37,8 +37,8 @@ export default function useAddUser() {
         return re.test(email);
     }
 
-    function validatePassword(inputField: string): boolean {
-        return inputField.trim().length > 5;
+    function validatePassword(password: string): boolean {
+        return password.trim().length > 5;
     }
 
     function handleEmailChange(evt: ChangeEvent<HTMLInputElement>) {

@@ -1,19 +1,19 @@
 import {Box, Button, TextField} from "@mui/material";
 import useEditProfile from "./useEditProfile";
-import PlaceTags from "./PlaceTags";
+import EditPlaces from "./EditPlaces";
 
 export default function EditProfile() {
     const {
-        registrationFormSubmit,
-        handleEmailChange,
+        handleFirstNameChange,
+        handleLastNameChange,
         inputFields,
-        emailError,
+        firstNameError,
+        lastNameError
     } = useEditProfile();
 
     return (
         <Box
             component="form"
-            onSubmit={registrationFormSubmit}
             sx={{
                 "& .MuiTextField-root": {
                     m: 1,
@@ -32,21 +32,21 @@ export default function EditProfile() {
                 size="small"
                 label="First Name"
                 id="outlined-size-normal"
-                value={inputFields.email}
-                onChange={handleEmailChange}
-                error={Boolean(emailError)}
-                helperText={emailError}
+                value={inputFields.firstName}
+                onChange={handleFirstNameChange}
+                error={Boolean(firstNameError)}
+                helperText={"Please enter a first name"}
             />
             <TextField
                 size="small"
                 label="Last Name"
                 id="outlined-size-normal"
-                value={inputFields.email}
-                onChange={handleEmailChange}
-                error={Boolean(emailError)}
-                helperText={emailError}
+                value={inputFields.lastName}
+                onChange={handleLastNameChange}
+                error={Boolean(lastNameError)}
+                helperText={"Please enter a last name"}
             />
-            <PlaceTags/>
+            <EditPlaces/>
             <Button type="submit" variant="outlined" color="inherit" size="medium">
                 Update Profile
             </Button>

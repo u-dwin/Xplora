@@ -5,7 +5,7 @@ import TextField from '@mui/material/TextField';
 import axios from "axios";
 import {Place} from "./Place";
 
-export default function PlaceTags() {
+export default function EditPlaces() {
 
 
     const [inputValue, setInputValue] = useState<string>("");
