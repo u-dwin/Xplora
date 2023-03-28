@@ -58,8 +58,6 @@ public class PlaceService {
             Thread.currentThread().interrupt();
             LOGGER.warning("Thread was interrupted: " + e);
         }
-        results.add("This did not work");
-
         return results;
     }
 }
