@@ -4,6 +4,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.NoSuchElementException;
+import java.util.Optional;
+
 @Service
 public class UserService {
 
@@ -18,15 +21,15 @@ public class UserService {
         this.userDetailsRepository = userDetailsRepository;
     }
 
-    public User addUser(UserDTO userRequestModel) {
-        User user = new User(userRequestModel);
+    public User addUser(UserDTO userDTO) {
+        User user = new User(userDTO);
         UserDetails userDetails = new UserDetails();
 
         user.setUserId(userIdService.generateId());
 
         userDetails.setUserID(user.userId);
 
-        userDetails.setType(userRequestModel.userType);
+        userDetails.setType(userDTO.userType);
 
         try {
             userDetailsRepository.save(userDetails);
@@ -37,14 +40,21 @@ public class UserService {
     }
 
     public UserDetails editUserDetails(UserDetailsDTO userDetailsDTO, String id) {
+
         UserDetails userDetails = new UserDetails(userDetailsDTO);
+        Optional<UserDetails> oldUserDetails = userDetailsRepository.findById(id);
         userDetails.setUserID(id);
 
         try {
+            if (oldUserDetails.isEmpty()) {
+                throw new NoSuchElementException();
+            }
+            String type = oldUserDetails.get().getType();
+            userDetails.setType(type);
             return userDetailsRepository.save(userDetails);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.CONFLICT);
         }
     }
-
 }
+
