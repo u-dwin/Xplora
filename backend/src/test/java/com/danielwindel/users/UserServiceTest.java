@@ -37,6 +37,7 @@ class UserServiceTest {
 
     UserDetails testUserDetailsOptional = new UserDetails("1", "traveler", "", "", "", "", empty, empty);
 
+
     @Test
     void isAddUserAddingUser() {
 
@@ -76,7 +77,14 @@ class UserServiceTest {
     }
 
     @Test
-    void isEditUserDetailsThrowingExceptionIfUserNotExists() {
+    void isEditUserDetailsThrowingNoSuchElementExceptionIfUserDoesNotExists() {
+        when(userDetailsRepository.findById("1")).
+                thenReturn(Optional.empty());
+
+        assertThrows(ResponseStatusException.class, () ->
+                userService.editUserDetails(testUserDetailsDTO, "1")
+        );
+    }
 
     }
-}
+

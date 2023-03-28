@@ -36,5 +36,4 @@ class UserControllerTest {
                         .isOk()).
                 andExpect(content().json(testUserJson));
     }
-
 }
