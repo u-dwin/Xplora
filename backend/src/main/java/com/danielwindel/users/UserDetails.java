@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.ArrayList;
+import java.util.List;
 
 @Document("profiles")
 @NoArgsConstructor
@@ -21,8 +21,8 @@ public class UserDetails {
     private String description;
     private String firstName;
     private String lastName;
-    private ArrayList<String> places;
-    private ArrayList<String> activities;
+    private List<String> places;
+    private List<String> activities;
 
     public UserDetails(UserDetailsDTO userDetailsDTO) {
         this.picture = userDetailsDTO.getPicture();
