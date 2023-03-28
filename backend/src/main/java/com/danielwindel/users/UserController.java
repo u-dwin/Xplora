@@ -18,7 +18,7 @@ public class UserController {
     }
 
     @PutMapping("/edit-profile/{id}")
-    public UserDetails updateTour(@PathVariable String id, @RequestBody UserDetailsDTO userDetailsDTO) {
+    public UserDetails editUserDetails(@PathVariable String id, @RequestBody UserDetailsDTO userDetailsDTO) {
         return userService.editUserDetails(userDetailsDTO, id);
     }
 
