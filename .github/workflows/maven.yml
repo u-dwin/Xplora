@@ -7,7 +7,6 @@
 # documentation.
 
 name: Java CI with Maven
-env: GOOGLE_API_KEY ${{ secrets.GOOGLE_API_KEY }}
 
 on:
   push:
@@ -29,5 +28,8 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
+      env:
+        GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
       run: mvn -B package --file backend/pom.xml
+
 
