@@ -7,7 +7,6 @@ import com.google.maps.PlacesApi;
 import com.google.maps.errors.ApiException;
 import com.google.maps.model.AutocompletePrediction;
 import com.google.maps.model.PlaceAutocompleteType;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -23,17 +22,13 @@ import java.util.stream.Collectors;
 @Service
 public class PlaceService {
 
-    private final GeoApiContext context;
-
     private static final Logger LOGGER = Logger.getLogger(PlaceService.class.getName());
 
+    private GeoApiContext geoApiContext;
 
-    public PlaceService(@Value("${google.api.key}") String apiKey) {
-        context = new GeoApiContext.Builder()
-                .apiKey(apiKey)
-                .build();
+    public PlaceService(GeoApiContext geoApiContext) {
+        this.geoApiContext = geoApiContext;
     }
-
 
     public List<String> search(PlaceDTO placeDTO) throws ResponseStatusException {
 
@@ -45,7 +40,7 @@ public class PlaceService {
 
         try {
 
-            AutocompletePrediction[] response = PlacesApi.placeAutocomplete(context, query, new PlaceAutocompleteRequest.SessionToken(UUID.randomUUID())).types(PlaceAutocompleteType.CITIES)
+            AutocompletePrediction[] response = PlacesApi.placeAutocomplete(geoApiContext, query, new PlaceAutocompleteRequest.SessionToken(UUID.randomUUID())).types(PlaceAutocompleteType.CITIES)
                     .await();
 
             results = Arrays.stream(response).map(autocompletePrediction -> autocompletePrediction.description)
