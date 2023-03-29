@@ -28,7 +28,7 @@ class UserControllerTest {
     private UserDetailsRepository userDetailsRepository;
 
     @MockBean
-    private GeoApiContext geoApiContext;
+    GeoApiContext geoApiContext;
 
     ObjectMapper mapper = new ObjectMapper();
 
