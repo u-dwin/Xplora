@@ -24,7 +24,9 @@ public class PlaceService {
 
     private static final Logger LOGGER = Logger.getLogger(PlaceService.class.getName());
 
-    private GeoApiContext geoApiContext;
+    public GeoApiContext geoApiContext;
+
+    public PlacesApi placesApi;
 
     public PlaceService(GeoApiContext geoApiContext) {
         this.geoApiContext = geoApiContext;
@@ -39,8 +41,7 @@ public class PlaceService {
         List<String> results = new ArrayList<>();
 
         try {
-
-            AutocompletePrediction[] response = PlacesApi.placeAutocomplete(geoApiContext, query, new PlaceAutocompleteRequest.SessionToken(UUID.randomUUID())).types(PlaceAutocompleteType.CITIES)
+            AutocompletePrediction[] response = placesApi.placeAutocomplete(geoApiContext, query, new PlaceAutocompleteRequest.SessionToken(UUID.randomUUID())).types(PlaceAutocompleteType.CITIES)
                     .await();
 
             results = Arrays.stream(response).map(autocompletePrediction -> autocompletePrediction.description)
