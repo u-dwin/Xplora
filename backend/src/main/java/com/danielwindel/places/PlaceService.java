@@ -6,6 +6,7 @@ import com.google.maps.PlaceAutocompleteRequest;
 import com.google.maps.errors.ApiException;
 import com.google.maps.model.AutocompletePrediction;
 import com.google.maps.model.PlaceAutocompleteType;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -19,17 +20,14 @@ import java.util.stream.Collectors;
 
 
 @Service
+@RequiredArgsConstructor
 public class PlaceService {
 
     private static final Logger LOGGER = Logger.getLogger(PlaceService.class.getName());
 
-    public GeoApiContext geoApiContext;
+    public final GeoApiContext geoApiContext;
 
-    public PlacesApiAutocompleteService placesApiAutocompleteService;
-
-    public PlaceService(GeoApiContext geoApiContext) {
-        this.geoApiContext = geoApiContext;
-    }
+    public final PlacesApiAutocompleteService placesApiAutocompleteService;
 
     public List<String> search(PlaceDTO placeDTO) throws ResponseStatusException {
 
@@ -40,8 +38,10 @@ public class PlaceService {
         List<String> results = new ArrayList<>();
 
         try {
-            AutocompletePrediction[] response = placesApiAutocompleteService.placeAutocomplete(geoApiContext, query, new PlaceAutocompleteRequest.SessionToken(UUID.randomUUID())).types(PlaceAutocompleteType.CITIES)
-                    .await();
+            PlaceAutocompleteRequest request = placesApiAutocompleteService.placeAutocomplete(geoApiContext, query, new PlaceAutocompleteRequest.SessionToken(UUID.randomUUID()))
+                    .types(PlaceAutocompleteType.CITIES);
+
+            AutocompletePrediction[] response = placesApiAutocompleteService.await(request);
 
             results = Arrays.stream(response).map(autocompletePrediction -> autocompletePrediction.description)
                     .collect(Collectors.toCollection(ArrayList::new));
