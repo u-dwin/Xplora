@@ -3,7 +3,6 @@ package com.danielwindel.places;
 
 import com.google.maps.GeoApiContext;
 import com.google.maps.PlaceAutocompleteRequest;
-import com.google.maps.PlacesApi;
 import com.google.maps.errors.ApiException;
 import com.google.maps.model.AutocompletePrediction;
 import com.google.maps.model.PlaceAutocompleteType;
@@ -26,7 +25,7 @@ public class PlaceService {
 
     public GeoApiContext geoApiContext;
 
-    public PlacesApi placesApi;
+    public PlacesApiAutocompleteService placesApiAutocompleteService;
 
     public PlaceService(GeoApiContext geoApiContext) {
         this.geoApiContext = geoApiContext;
@@ -41,7 +40,7 @@ public class PlaceService {
         List<String> results = new ArrayList<>();
 
         try {
-            AutocompletePrediction[] response = placesApi.placeAutocomplete(geoApiContext, query, new PlaceAutocompleteRequest.SessionToken(UUID.randomUUID())).types(PlaceAutocompleteType.CITIES)
+            AutocompletePrediction[] response = placesApiAutocompleteService.placeAutocomplete(geoApiContext, query, new PlaceAutocompleteRequest.SessionToken(UUID.randomUUID())).types(PlaceAutocompleteType.CITIES)
                     .await();
 
             results = Arrays.stream(response).map(autocompletePrediction -> autocompletePrediction.description)
