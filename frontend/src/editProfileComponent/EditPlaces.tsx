@@ -10,6 +10,7 @@ export default function EditPlaces() {
 
     const [inputValue, setInputValue] = useState<string>("");
     const [options, setOptions] = useState<string[]>([]);
+    const placesSelection: string[] = [];
     const [place, setPlace] = useState<Place>({name: ""})
 
 
@@ -36,6 +37,7 @@ export default function EditPlaces() {
                 autoComplete
                 id="tags-standard"
                 limitTags={5}
+                value={placesSelection}
                 options={options}
                 getOptionLabel={(option) => option}
                 defaultValue={[]}
