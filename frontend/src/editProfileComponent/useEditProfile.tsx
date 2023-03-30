@@ -26,6 +26,10 @@ export default function useEditProfile() {
         setInputFields({...inputFields, lastName: evt.target.value})
     }
 
+    function handleDescriptionChange(evt: ChangeEvent<HTMLInputElement>) {
+        setInputFields({...inputFields, description: evt.target.value})
+    }
+
     function validateFirstName(firstName: string) {
         return firstName.trim().length > 1;
     }
@@ -35,14 +39,34 @@ export default function useEditProfile() {
     }
 
     function validateDescription(description: string): boolean {
-        return description.trim().length > 30;
+        return description.trim().length > 30 && description.trim().length <= 300;
     }
 
+    /*function userUpdateFormSubmit(evt: React.FormEvent<HTMLFormElement>) {
+        evt.preventDefault();
+
+        if (vali(inputFields.email) && validatePassword(inputFields.password)) {
+            axios.post("/api/users/add", {
+                userType: addUser?.userType,
+                userEmailAddress: addUser?.userEmailAddress,
+                userPassword: addUser?.userPassword
+            })
+                .then(() => {
+                    navigate("/sign-up-success")
+                })
+                .catch((error) => console.error(error))
+        } else if (!validateEmail(inputFields.email)) {
+            return setEmailError("Please enter a valid email address")
+        } else if (!validatePassword(inputFields.password)) {
+            return setPasswordError("Please enter a password with at least 6 characters")
+        }
+    }*/
 
     return {
         handleLastNameChange,
         handleFirstNameChange,
         inputFields,
+        handleDescriptionChange,
         firstNameError,
         lastNameError,
         descriptionError

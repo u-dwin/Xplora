@@ -48,9 +48,11 @@ export default function EditPlaces() {
                 renderInput={(params) => (
                     <TextField
                         {...params}
-                        label="Add up to 5 cities"
-                        placeholder="Cities"
+                        label="Favorite Places"
+                        placeholder="Add up to 5 places"
                         onChange={handleInputChange}
+                        helperText="Add up to 5 places"
+                        required={true}
                     />
                 )}
             />
