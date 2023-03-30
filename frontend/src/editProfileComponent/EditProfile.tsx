@@ -1,6 +1,7 @@
 import {Box, Button, TextField} from "@mui/material";
 import useEditProfile from "./useEditProfile";
 import EditPlaces from "./EditPlaces";
+import EditActivities from "./EditActivities";
 
 export default function EditProfile() {
     const {
@@ -73,6 +74,8 @@ export default function EditProfile() {
                     required={true}
                 />
                 <EditPlaces/>
+                <EditActivities/>
+
                 <Box sx={{height: "50px"}}></Box>
 
                 <Button type="submit" variant="outlined" color="inherit" size="medium">
