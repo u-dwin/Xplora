@@ -6,10 +6,7 @@ import com.google.maps.PlaceAutocompleteRequest;
 import com.google.maps.PlacesApi;
 import com.google.maps.errors.ApiException;
 import com.google.maps.model.AutocompletePrediction;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,14 +16,15 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 
 class PlaceServiceTest {
 
-    @Mock
-    private PlacesApi placesApi;
+    private PlacesApi placesApi = mock(PlacesApi.class);
 
-    @Mock
-    private GeoApiContext geoApiContext;
+    private GeoApiContext geoApiContext = mock(GeoApiContext.class);
+
+    private PlaceAutocompleteRequest placeAutocompleteRequest = mock(PlaceAutocompleteRequest.class);
 
     private PlaceService placeService = new PlaceService(geoApiContext);
 
@@ -45,20 +43,15 @@ class PlaceServiceTest {
             }}
     };
 
-    @BeforeEach
-    void setUp() {
-        MockitoAnnotations.openMocks(this);
-        placeService = new PlaceService(geoApiContext);
-    }
-
     @Test
     void isPlaceSearchReturningCorrectSearchResults() throws InterruptedException, ApiException, IOException {
         // Mock the PlacesApi response
-        doReturn(predictions).when(placesApi).placeAutocomplete(
+        doReturn(placeAutocompleteRequest).when(placesApi).placeAutocomplete(
                 any(GeoApiContext.class),
                 any(String.class),
-                any(PlaceAutocompleteRequest.SessionToken.class)
-        ).await();
+                any(PlaceAutocompleteRequest.SessionToken.class));
+
+        doReturn(predictions).when(placeAutocompleteRequest).await();
 
         // Call the PlaceService method with the mocked response
         List<String> actual = placeService.search(placeDTO);
