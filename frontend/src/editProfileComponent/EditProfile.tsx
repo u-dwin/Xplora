@@ -65,7 +65,7 @@ export default function EditProfile() {
                     label="Bio"
                     multiline
                     rows={4}
-                    placeholder={"Introduce yourself in 500 characters or less..."}
+                    placeholder={"Introduce yourself in up to 500 characters..."}
                     value={inputFields.description}
                     onChange={handleDescriptionChange}
                     inputProps={{
