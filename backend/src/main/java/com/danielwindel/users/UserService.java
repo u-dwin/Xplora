@@ -58,13 +58,13 @@ public class UserService {
     }
 
     public UserDetails getUserDetails(String id) {
-        Optional<UserDetails> singleUserDetailOptional = userDetailsRepository.findById(id);
+        Optional<UserDetails> singleUserDetailsOptional = userDetailsRepository.findById(id);
 
-        if (singleUserDetailOptional.isEmpty()) {
+        if (singleUserDetailsOptional.isEmpty()) {
             throw new NoSuchElementException();
         }
         UserDetails singleUserDetails;
-        singleUserDetails = singleUserDetailOptional.get();
+        singleUserDetails = singleUserDetailsOptional.get();
         return singleUserDetails;
     }
 }
