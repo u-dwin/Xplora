@@ -86,5 +86,14 @@ class UserServiceTest {
         );
     }
 
+    @Test
+    void isSingleUserDetailsReturningSingleUserDetail() {
+        when(userDetailsRepository.findById("1")).thenReturn(Optional.of(testUserDetails));
+
+        UserDetails actual = userService.getUserDetails("1");
+
+        assertEquals(testUserDetails, actual);
     }
+}
+
 
