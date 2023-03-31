@@ -2,10 +2,13 @@ import {Box, Button, TextField} from "@mui/material";
 import useEditProfile from "./useEditProfile";
 import EditPlaces from "./EditPlaces";
 import EditActivities from "./EditActivities";
+import {useParams} from "react-router-dom";
 import {UserDetails} from "./UserDetails";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import axios from "axios";
 
-export default function EditProfile(props: UserDetails) {
+
+export default function EditProfile() {
     const {
         handleFirstNameChange,
         handleLastNameChange,
@@ -15,7 +18,26 @@ export default function EditProfile(props: UserDetails) {
         handleDescriptionChange
     } = useEditProfile();
 
-    const [activities, setActivities] = useState<string[]>(props.activities);
+    const {userId} = useParams();
+    const [userDetails, setUserDetails] = useState<UserDetails>({
+        picture: "",
+        description: "",
+        firstName: "",
+        lastName: "",
+        places: [],
+        activities: []
+    });
+
+
+    useEffect(() => {
+        axios.get(`/api/users/profile/${userId}`)
+            .then((response) => {
+                setUserDetails(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, [userId]);
 
     return (
         <Box sx={{
@@ -77,8 +99,8 @@ export default function EditProfile(props: UserDetails) {
                     }}
                     required={true}
                 />
-                <EditPlaces places={props.places}/>
-                <EditActivities activities={activities} setActivities={setActivities}/>
+                <EditPlaces places={userDetails.places}/>
+                <EditActivities activities={userDetails.activities}/>
 
                 <Box sx={{height: "50px"}}></Box>
 

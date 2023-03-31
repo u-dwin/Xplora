@@ -73,7 +73,7 @@ export default function useAddUser() {
             })
                 .then((response) => {
                     const id = response.data.userId
-                    navigate("/edit-profile/${id}")
+                    navigate(`/edit-profile/${id}`)
                 })
                 .catch((error) => console.error(error))
         } else if (!validateEmail(inputFields.email)) {

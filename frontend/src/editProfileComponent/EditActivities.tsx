@@ -4,8 +4,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 
 type EditActivitiesProps = {
-    activities: string[];
-    setActivities: (activities: string[]) => void;
+    activities: string[]
 }
 export default function EditActivities(props: EditActivitiesProps) {
 
@@ -34,7 +33,6 @@ export default function EditActivities(props: EditActivitiesProps) {
     const handleActivitySelectionChange = (event: React.SyntheticEvent, value: string[]) => {
         setValue(value)
         setActivitySelection(value);
-        props.setActivities(value);
     };
 
 

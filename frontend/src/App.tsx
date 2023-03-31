@@ -12,7 +12,7 @@ function App() {
                 <Route path={"/"} element={<Navigate to={"/sign-up"}/>}/>
                 <Route path="/sign-up" element={<SignUp/>}/>
                 <Route path="/sign-up-success" element={<SignUpSuccess/>}/>
-                <Route path="/edit-profile/:id" element={<EditProfile/>}/>
+                <Route path="/edit-profile/:userId" element={<EditProfile/>}/>
             </Routes>
         </div>
     )

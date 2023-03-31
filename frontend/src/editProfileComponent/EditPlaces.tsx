@@ -5,12 +5,13 @@ import TextField from '@mui/material/TextField';
 import axios from "axios";
 import {Place} from "./Place";
 
-export default function EditPlaces(props: { places: string[] }) {
-
-
+type EditPlacesProps = {
+    places: string[]
+}
+export default function EditPlaces(props: EditPlacesProps) {
     const [inputValue, setInputValue] = useState<string>("");
     const [options, setOptions] = useState<string[]>([]);
-    const [placeSelection, setPlaceSelection] = useState<string[]>([]);
+    const [placeSelection, setPlaceSelection] = useState<string[]>(props.places);
     const [place, setPlace] = useState<Place>({name: ""})
     const [value, setValue] = useState<string[]>([])
 
