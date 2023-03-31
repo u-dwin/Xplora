@@ -5,7 +5,7 @@ import TextField from '@mui/material/TextField';
 import axios from "axios";
 import {Place} from "./Place";
 
-export default function EditPlaces() {
+export default function EditPlaces(props: { places: string[] }) {
 
 
     const [inputValue, setInputValue] = useState<string>("");

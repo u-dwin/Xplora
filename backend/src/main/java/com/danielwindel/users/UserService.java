@@ -56,5 +56,16 @@ public class UserService {
             throw new ResponseStatusException(HttpStatus.CONFLICT);
         }
     }
+
+    public UserDetails getUserDetails(String id) {
+        Optional<UserDetails> singleUserDetailOptional = userDetailsRepository.findById(id);
+
+        if (singleUserDetailOptional.isEmpty()) {
+            throw new NoSuchElementException();
+        }
+        UserDetails singleUserDetails;
+        singleUserDetails = singleUserDetailOptional.get();
+        return singleUserDetails;
+    }
 }
 

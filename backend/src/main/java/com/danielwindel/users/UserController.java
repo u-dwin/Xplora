@@ -17,9 +17,13 @@ public class UserController {
         return userService.addUser(userRequestModel);
     }
 
-    @PutMapping("/edit-profile/{id}")
+    @PutMapping("/profile/{id}")
     public UserDetails editUserDetails(@PathVariable String id, @RequestBody UserDetailsDTO userDetailsDTO) {
         return userService.editUserDetails(userDetailsDTO, id);
     }
 
+    @GetMapping("/profile/{id}")
+    public UserDetails getUserDetails(@PathVariable String id) {
+        return userService.getUserDetails(id);
+    }
 }

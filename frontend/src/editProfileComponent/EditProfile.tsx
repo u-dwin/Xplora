@@ -2,8 +2,10 @@ import {Box, Button, TextField} from "@mui/material";
 import useEditProfile from "./useEditProfile";
 import EditPlaces from "./EditPlaces";
 import EditActivities from "./EditActivities";
+import {Profile} from "./Profile";
+import {useState} from "react";
 
-export default function EditProfile() {
+export default function EditProfile(props: Profile) {
     const {
         handleFirstNameChange,
         handleLastNameChange,
@@ -13,6 +15,7 @@ export default function EditProfile() {
         handleDescriptionChange
     } = useEditProfile();
 
+    const [activities, setActivities] = useState<string[]>(props.activities);
 
     return (
         <Box sx={{
@@ -74,8 +77,8 @@ export default function EditProfile() {
                     }}
                     required={true}
                 />
-                <EditPlaces/>
-                <EditActivities/>
+                <EditPlaces places={props.places}/>
+                <EditActivities activities={activities} setActivities={setActivities}/>
 
                 <Box sx={{height: "50px"}}></Box>
 
