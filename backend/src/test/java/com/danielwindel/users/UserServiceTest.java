@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -93,6 +94,17 @@ class UserServiceTest {
         UserDetails actual = userService.getUserDetails("1");
 
         assertEquals(testUserDetails, actual);
+    }
+
+    @Test
+    void isSingleUserDetailsThrowingExceptionWhenNotFound() {
+        when(userDetailsRepository.findById("1")).
+                thenReturn(Optional.empty());
+
+        assertThrows(NoSuchElementException.class, () ->
+                userService.getUserDetails("1")
+        );
+
     }
 }
 
