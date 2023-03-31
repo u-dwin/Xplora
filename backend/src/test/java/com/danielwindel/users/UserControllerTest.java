@@ -69,7 +69,7 @@ class UserControllerTest {
         userDetailsRepository.save(testUserDetailsEmpty);
 
         mockMvc.perform(MockMvcRequestBuilders
-                        .put("/api/users/edit-profile/1")
+                        .put("/api/users/profile/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(testUserDetailDTOJson))
                 .andExpect(MockMvcResultMatchers.status()
