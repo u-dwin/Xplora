@@ -1,12 +1,14 @@
-import {ChangeEvent, useState} from "react";
-import {useNavigate} from "react-router-dom";
+import {ChangeEvent, useEffect, useState} from "react";
+import {useNavigate, useParams} from "react-router-dom";
 import {UserDetails} from "./UserDetails";
+import axios from "axios";
 
 export default function useEditProfile() {
-    const [userDetails, addUserDetails] = useState<UserDetails>()
     const [firstNameError, setFirstNameError] = useState<string | boolean>(false)
     const [lastNameError, setLastNameError] = useState<string | boolean>(false)
     const [descriptionError, setDescriptionError] = useState<string | boolean>(false)
+
+    const {userId} = useParams();
 
     const navigate = useNavigate();
     const [inputFields, setInputFields] = useState<UserDetails>({
@@ -17,6 +19,17 @@ export default function useEditProfile() {
         places: [""],
         activities: [""],
     })
+
+    useEffect(() => {
+        axios.get(`/api/users/profile/${userId}`)
+            .then((response) => {
+                setInputFields(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, [userId]);
+
     function handleFirstNameChange(evt: ChangeEvent<HTMLInputElement>) {
         setInputFields({...inputFields, firstName: evt.target.value})
     }

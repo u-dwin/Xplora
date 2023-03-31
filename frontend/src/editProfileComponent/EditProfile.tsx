@@ -2,42 +2,19 @@ import {Box, Button, TextField} from "@mui/material";
 import useEditProfile from "./useEditProfile";
 import EditPlaces from "./EditPlaces";
 import EditActivities from "./EditActivities";
-import {useParams} from "react-router-dom";
-import {UserDetails} from "./UserDetails";
-import {useEffect, useState} from "react";
-import axios from "axios";
 
 
 export default function EditProfile() {
     const {
-        handleFirstNameChange,
         handleLastNameChange,
+        handleFirstNameChange,
         inputFields,
+        handleDescriptionChange,
         firstNameError,
         lastNameError,
-        handleDescriptionChange
+        descriptionError
     } = useEditProfile();
 
-    const {userId} = useParams();
-    const [userDetails, setUserDetails] = useState<UserDetails>({
-        picture: "",
-        description: "",
-        firstName: "",
-        lastName: "",
-        places: [],
-        activities: []
-    });
-
-
-    useEffect(() => {
-        axios.get(`/api/users/profile/${userId}`)
-            .then((response) => {
-                setUserDetails(response.data);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    }, [userId]);
 
     return (
         <Box sx={{
@@ -99,8 +76,8 @@ export default function EditProfile() {
                     }}
                     required={true}
                 />
-                <EditPlaces places={userDetails.places}/>
-                <EditActivities activities={userDetails.activities}/>
+                <EditPlaces places={inputFields.places}/>
+                <EditActivities activities={inputFields.activities}/>
 
                 <Box sx={{height: "50px"}}></Box>
 
