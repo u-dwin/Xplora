@@ -76,4 +76,19 @@ class UserControllerTest {
                         .isOk()).
                 andExpect(content().json(testUserDetailsJson));
     }
+
+    @Test
+    @DirtiesContext
+    void getUserDetailsEndpointReturnsUser() throws Exception {
+        String testUserDetailsJson = mapper.writeValueAsString(testUserDetails);
+
+        userDetailsRepository.save(testUserDetails);
+
+        mockMvc.perform(MockMvcRequestBuilders
+                        .get("/api/users/profile/1"))
+                .andExpect(MockMvcResultMatchers.status()
+                        .isOk()).
+                andExpect(content().json(testUserDetailsJson));
+    }
+
 }
