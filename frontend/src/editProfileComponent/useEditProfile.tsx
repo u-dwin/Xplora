@@ -1,15 +1,15 @@
 import {ChangeEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {Profile} from "./Profile";
+import {UserDetails} from "./UserDetails";
 
 export default function useEditProfile() {
+    const [userDetails, addUserDetails] = useState<UserDetails>()
     const [firstNameError, setFirstNameError] = useState<string | boolean>(false)
     const [lastNameError, setLastNameError] = useState<string | boolean>(false)
     const [descriptionError, setDescriptionError] = useState<string | boolean>(false)
 
-
     const navigate = useNavigate();
-    const [inputFields, setInputFields] = useState<Profile>({
+    const [inputFields, setInputFields] = useState<UserDetails>({
         picture: "",
         description: "",
         firstName: "",
@@ -17,7 +17,6 @@ export default function useEditProfile() {
         places: [""],
         activities: [""],
     })
-
     function handleFirstNameChange(evt: ChangeEvent<HTMLInputElement>) {
         setInputFields({...inputFields, firstName: evt.target.value})
     }

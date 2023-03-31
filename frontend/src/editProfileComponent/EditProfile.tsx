@@ -2,10 +2,10 @@ import {Box, Button, TextField} from "@mui/material";
 import useEditProfile from "./useEditProfile";
 import EditPlaces from "./EditPlaces";
 import EditActivities from "./EditActivities";
-import {Profile} from "./Profile";
+import {UserDetails} from "./UserDetails";
 import {useState} from "react";
 
-export default function EditProfile(props: Profile) {
+export default function EditProfile(props: UserDetails) {
     const {
         handleFirstNameChange,
         handleLastNameChange,

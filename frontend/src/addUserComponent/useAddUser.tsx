@@ -71,8 +71,9 @@ export default function useAddUser() {
                 userEmailAddress: addUser?.userEmailAddress,
                 userPassword: addUser?.userPassword
             })
-                .then(() => {
-                    navigate("/sign-up-success")
+                .then((response) => {
+                    const id = response.data.userId
+                    navigate("/edit-profile/${id}")
                 })
                 .catch((error) => console.error(error))
         } else if (!validateEmail(inputFields.email)) {

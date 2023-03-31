@@ -90,5 +90,4 @@ class UserControllerTest {
                         .isOk()).
                 andExpect(content().json(testUserDetailsJson));
     }
-
 }
