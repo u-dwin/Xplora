@@ -1,3 +1,4 @@
+import * as React from "react";
 import {ChangeEvent, useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import {UserDetails} from "./UserDetails";
@@ -7,7 +8,6 @@ export default function useEditProfile() {
     const [firstNameError, setFirstNameError] = useState<string | boolean>(false)
     const [lastNameError, setLastNameError] = useState<string | boolean>(false)
     const [descriptionError, setDescriptionError] = useState<string | boolean>(false)
-
     const {userId} = useParams();
 
     const navigate = useNavigate();
@@ -16,8 +16,8 @@ export default function useEditProfile() {
         description: "",
         firstName: "",
         lastName: "",
-        places: [""],
-        activities: [""],
+        places: [],
+        activities: [],
     })
 
     useEffect(() => {
@@ -42,6 +42,15 @@ export default function useEditProfile() {
         setInputFields({...inputFields, description: evt.target.value})
     }
 
+    const handleActivitySelectionChange = (evt: React.SyntheticEvent, value: string[]) => {
+        setInputFields({...inputFields, activities: value});
+    };
+
+    const handlePlacesSelectionChange = (evt: React.SyntheticEvent, value: string[]) => {
+        setInputFields({...inputFields, places: value});
+    };
+
+
     function validateFirstName(firstName: string) {
         return firstName.trim().length > 1;
     }
@@ -54,7 +63,7 @@ export default function useEditProfile() {
         return description.trim().length > 30 && description.trim().length <= 300;
     }
 
-    function registrationFormSubmit(evt: React.FormEvent<HTMLFormElement>) {
+    function updateProfileFormSubmit(evt: React.FormEvent<HTMLFormElement>) {
         evt.preventDefault();
 
         axios.put(`/api/users/profile/${userId}`, {
@@ -74,9 +83,13 @@ export default function useEditProfile() {
         handleLastNameChange,
         handleFirstNameChange,
         inputFields,
+        setInputFields,
         handleDescriptionChange,
+        handleActivitySelectionChange,
+        handlePlacesSelectionChange,
         firstNameError,
         lastNameError,
-        descriptionError
+        descriptionError,
+        updateProfileFormSubmit
     }
 }

@@ -7,13 +7,13 @@ import {Place} from "./Place";
 
 type EditPlacesProps = {
     places: string[]
+    handlePlacesSelectionChange: (evt: React.SyntheticEvent, value: string[]) => void
 }
+
 export default function EditPlaces(props: EditPlacesProps) {
     const [inputValue, setInputValue] = useState<string>("");
     const [options, setOptions] = useState<string[]>([]);
-    const [placeSelection, setPlaceSelection] = useState<string[]>(props.places);
     const [place, setPlace] = useState<Place>({name: ""})
-    const [value, setValue] = useState<string[]>([])
 
     const handleInputChange = async (event: ChangeEvent<HTMLInputElement>) => {
         const query = event.target.value;
@@ -31,12 +31,6 @@ export default function EditPlaces(props: EditPlacesProps) {
         }
     };
 
-    const handleActivitySelectionChange = (event: React.SyntheticEvent, value: string[]) => {
-        setValue(value)
-        setPlaceSelection(value)
-        console.log(placeSelection)
-    }
-
     return (
         <div>
             <Autocomplete
@@ -44,15 +38,15 @@ export default function EditPlaces(props: EditPlacesProps) {
                 autoComplete
                 id="tags-standard"
                 limitTags={5}
-                value={value}
+                value={props.places}
                 options={options}
                 getOptionLabel={(option) => option}
-                defaultValue={[]}
                 freeSolo={true}
                 inputValue={inputValue}
-                onChange={handleActivitySelectionChange}
+                onChange={props.handlePlacesSelectionChange}
                 onInputChange={(event, inputValue, reason) => {
                     if (reason === "reset") {
+                        ;
                         setInputValue("");
                     }
                 }}

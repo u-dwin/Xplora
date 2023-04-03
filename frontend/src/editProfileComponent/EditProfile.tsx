@@ -8,11 +8,14 @@ export default function EditProfile() {
     const {
         handleLastNameChange,
         handleFirstNameChange,
+        handlePlacesSelectionChange,
+        handleActivitySelectionChange,
         inputFields,
         handleDescriptionChange,
         firstNameError,
         lastNameError,
-        descriptionError
+        descriptionError,
+        updateProfileFormSubmit
     } = useEditProfile();
 
 
@@ -29,6 +32,7 @@ export default function EditProfile() {
 
             <Box
                 component="form"
+                onSubmit={updateProfileFormSubmit}
                 sx={{
                     "& .MuiTextField-root": {
                         m: 1,
@@ -38,10 +42,10 @@ export default function EditProfile() {
                         flexWrap: "wrap",
                         rowGap: "5px",
                         justifyContent: "center"
-                },
+                    },
             }}
-            noValidate
-            autoComplete="off"
+                noValidate
+                autoComplete="off"
         >
             <TextField
                 size="small"
@@ -76,9 +80,9 @@ export default function EditProfile() {
                     }}
                     required={true}
                 />
-                <EditPlaces places={inputFields.places}/>
-                <EditActivities activities={inputFields.activities}/>
-
+                <EditPlaces places={inputFields.places} handlePlacesSelectionChange={handlePlacesSelectionChange}/>
+                <EditActivities activities={inputFields.activities}
+                                handleActivitiesSelectionChange={handleActivitySelectionChange}/>
                 <Box sx={{height: "50px"}}></Box>
 
                 <Button type="submit" variant="outlined" color="inherit" size="medium">
