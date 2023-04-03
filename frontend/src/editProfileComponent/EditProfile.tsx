@@ -47,7 +47,7 @@ export default function EditProfile() {
                 size="small"
                 label="First Name"
                 id="outlined-size-normal"
-                value={inputFields.firstName}
+                defaultValue={inputFields.firstName}
                 onChange={handleFirstNameChange}
                 error={Boolean(firstNameError)}
                 helperText={"Please enter a first name"}
@@ -57,7 +57,7 @@ export default function EditProfile() {
                     size="small"
                     label="Last Name"
                     id="outlined-size-normal"
-                    value={inputFields.lastName}
+                    defaultValue={inputFields.lastName}
                     onChange={handleLastNameChange}
                     error={Boolean(lastNameError)}
                     helperText={"Please enter a last name"}
@@ -69,7 +69,7 @@ export default function EditProfile() {
                     multiline
                     rows={4}
                     placeholder={"Introduce yourself in up to 500 characters..."}
-                    value={inputFields.description}
+                    defaultValue={inputFields.description}
                     onChange={handleDescriptionChange}
                     inputProps={{
                         maxLength: 500,

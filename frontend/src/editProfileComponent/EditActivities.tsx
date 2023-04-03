@@ -46,7 +46,6 @@ export default function EditActivities(props: EditActivitiesProps) {
                 options={options}
                 getOptionLabel={(activities) => activities}
                 value={value}
-                defaultValue={[]}
                 freeSolo={true}
                 inputValue={inputValue}
                 filterSelectedOptions
