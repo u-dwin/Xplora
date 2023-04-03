@@ -75,9 +75,7 @@ export default function EditProfile() {
                     placeholder={"Introduce yourself in up to 500 characters..."}
                     value={inputFields.description}
                     onChange={handleDescriptionChange}
-                    inputProps={{
-                        maxLength: 500,
-                    }}
+                    inputProps={{maxLength: 500}}
                     required={true}
                 />
                 <EditPlaces places={inputFields.places} handlePlacesSelectionChange={handlePlacesSelectionChange}/>

@@ -43,20 +43,24 @@ export default function useEditProfile() {
     }
 
     const handleActivitySelectionChange = (evt: React.SyntheticEvent, value: string[]) => {
-        setInputFields({...inputFields, activities: value});
-    };
-
-    const handlePlacesSelectionChange = (evt: React.SyntheticEvent, value: string[]) => {
-        setInputFields({...inputFields, places: value});
-    };
-
-
-    function validateFirstName(firstName: string) {
-        return firstName.trim().length > 1;
+        if (inputFields.activities.length <= 6) {
+            setInputFields({...inputFields, activities: value});
+        }
     }
 
-    function validateLastName(lastName: string): boolean {
-        return lastName.trim().length > 1;
+    const handlePlacesSelectionChange = (evt: React.SyntheticEvent, value: string[]) => {
+        if (inputFields.places.length <= 4) {
+            setInputFields({...inputFields, places: value});
+        }
+    }
+
+
+    function validateInputFields(inputFields: UserDetails): boolean {
+        return inputFields.firstName.trim().length > 1 &&
+            inputFields.lastName.trim().length > 1 &&
+            inputFields.description.trim().length > 1 &&
+            inputFields.places.length > 1 &&
+            inputFields.activities.length > 1
     }
 
     function validateDescription(description: string): boolean {
@@ -66,17 +70,19 @@ export default function useEditProfile() {
     function updateProfileFormSubmit(evt: React.FormEvent<HTMLFormElement>) {
         evt.preventDefault();
 
-        axios.put(`/api/users/profile/${userId}`, {
-            picture: "",
-            description: inputFields.description,
-            firstName: inputFields.firstName,
-            lastName: inputFields.lastName,
-            places: inputFields.places,
-            activities: inputFields.activities
-        })
-            .then((response) => {
-                navigate(`/edit-profile/${userId}`)
+        if (validateInputFields(inputFields) === true) {
+            axios.put(`/api/users/profile/${userId}`, {
+                picture: "",
+                description: inputFields.description,
+                firstName: inputFields.firstName,
+                lastName: inputFields.lastName,
+                places: inputFields.places,
+                activities: inputFields.activities
             })
+                .then((response) => {
+                    navigate(`/edit-profile/${userId}`)
+                })
+        }
     }
 
     return {
