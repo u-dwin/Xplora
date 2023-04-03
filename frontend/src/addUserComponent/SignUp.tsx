@@ -58,7 +58,7 @@ export default function SignUp() {
                         <TextField
                             size="small"
                             label="email"
-                            id="outlined-size-normal"
+                            id="emailTextfield"
                             value={inputFields.email}
                             onChange={handleEmailChange}
                             error={Boolean(emailError)}
@@ -69,7 +69,7 @@ export default function SignUp() {
                         size="small"
                         label="password"
                         type="password"
-                        id="outlined-size-normal"
+                        id="passwordTextfield"
                         value={inputFields.password}
                         onChange={handlePasswordChange}
                         error={Boolean(passwordError)}
