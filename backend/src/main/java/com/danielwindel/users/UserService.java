@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -30,6 +31,10 @@ public class UserService {
         userDetails.setUserID(user.userId);
 
         userDetails.setType(userDTO.userType);
+
+        userDetails.setPlaces(new ArrayList<>());
+
+        userDetails.setActivities(new ArrayList<>());
 
         try {
             userDetailsRepository.save(userDetails);
