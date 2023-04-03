@@ -32,6 +32,14 @@ public class UserService {
 
         userDetails.setType(userDTO.userType);
 
+        userDetails.setPicture("");
+
+        userDetails.setFirstName("");
+
+        userDetails.setLastName("");
+
+        userDetails.setDescription("");
+
         userDetails.setPlaces(new ArrayList<>());
 
         userDetails.setActivities(new ArrayList<>());
