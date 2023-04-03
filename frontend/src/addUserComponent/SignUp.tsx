@@ -68,6 +68,7 @@ export default function SignUp() {
                     <TextField
                         size="small"
                         label="password"
+                        type="password"
                         id="outlined-size-normal"
                         value={inputFields.password}
                         onChange={handlePasswordChange}

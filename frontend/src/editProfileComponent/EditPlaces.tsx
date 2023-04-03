@@ -34,6 +34,7 @@ export default function EditPlaces(props: EditPlacesProps) {
     const handleActivitySelectionChange = (event: React.SyntheticEvent, value: string[]) => {
         setValue(value)
         setPlaceSelection(value)
+        console.log(placeSelection)
     }
 
     return (
