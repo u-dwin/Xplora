@@ -17,7 +17,6 @@ export default function EditProfile() {
         handleDescriptionChange,
         updateProfileFormSubmit,
         handleFileSelected,
-        fileInputRef,
         handleFileUpload
     } = useEditProfile();
 
@@ -66,11 +65,12 @@ export default function EditProfile() {
                 >
                     <Avatar
                         alt="profile"
-                        src="https://media.licdn.com/dms/image/D4E03AQGN7GwF9u-UTQ/profile-displayphoto-shrink_800_800/0/1679248833047?e=1686182400&v=beta&t=SkaZW7K3m0pKnMZa4_tcB8vlbfJQ_AneOscbP6nyoy8"
+                        src={inputFields.picture}
                         sx={{width: 70, height: 70}}
                     />
-                    <IconButton color="primary" aria-label="upload picture" component="label">
-                        <input hidden accept="image/*" type="file" onClick={handleFileUpload}/>
+                    <IconButton color="primary" aria-label="upload picture" component="label"
+                                onClick={handleFileUpload}>
+                        <input hidden accept="image/*" type="file" onInput={handleFileSelected}/>
                         <DriveFolderUpload/>
                     </IconButton>
                 </Box>

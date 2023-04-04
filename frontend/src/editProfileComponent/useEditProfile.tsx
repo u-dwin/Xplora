@@ -72,9 +72,11 @@ export default function useEditProfile() {
     }
 
     function handleFileSelected(event: React.ChangeEvent<HTMLInputElement>) {
-        const file = event.target.files?.[0];
-        if (file) {
-            axios.post("api/photos/add", file)
+        const photo = event.target.files?.[0];
+        if (photo) {
+            const formData = new FormData();
+            formData.append("photo", photo);
+            axios.post("/api/photos/add", formData)
                 .then((response) => {
                     profile_picture_url = response.data
                     setInputFields({...inputFields, picture: profile_picture_url})
