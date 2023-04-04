@@ -20,10 +20,6 @@ export default function EditProfile() {
         handleFileUpload
     } = useEditProfile();
 
-
-
-
-
     return (
         <Box sx={{
             textAlign: "center",
@@ -74,6 +70,7 @@ export default function EditProfile() {
                         <DriveFolderUpload/>
                     </IconButton>
                 </Box>
+                <Box sx={{height: "10px"}}></Box>
 
                 <TextField
                     size="small"

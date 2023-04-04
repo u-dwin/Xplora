@@ -91,7 +91,7 @@ export default function useEditProfile() {
             setNotAllFieldsFilledError("Please fill in all required fields")
         } else {
             axios.put(`/api/users/profile/${userId}`, {
-                picture: "",
+                picture: inputFields.picture,
                 description: inputFields.description,
                 firstName: inputFields.firstName,
                 lastName: inputFields.lastName,
