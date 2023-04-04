@@ -1,4 +1,4 @@
-package com.danielwindel.users;
+package com.danielwindel.util.photos;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;

@@ -1,4 +1,4 @@
-package com.danielwindel.users;
+package com.danielwindel.util.photos;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

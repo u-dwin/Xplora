@@ -1,4 +1,4 @@
-package com.danielwindel.places;
+package com.danielwindel.util.places;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
