@@ -11,10 +11,8 @@ export default function EditProfile() {
         handlePlacesSelectionChange,
         handleActivitySelectionChange,
         inputFields,
+        notAllFieldsFilledError,
         handleDescriptionChange,
-        firstNameError,
-        lastNameError,
-        descriptionError,
         updateProfileFormSubmit
     } = useEditProfile();
 
@@ -53,8 +51,8 @@ export default function EditProfile() {
                 id="outlined-size-normal"
                 value={inputFields.firstName}
                 onChange={handleFirstNameChange}
-                error={Boolean(firstNameError)}
                 helperText={"Please enter a first name"}
+                inputProps={{maxLength: 30}}
                 required={true}
             />
                 <TextField
@@ -63,8 +61,8 @@ export default function EditProfile() {
                     id="outlined-size-normal"
                     value={inputFields.lastName}
                     onChange={handleLastNameChange}
-                    error={Boolean(lastNameError)}
                     helperText={"Please enter a last name"}
+                    inputProps={{maxLength: 30}}
                     required={true}
                 />
                 <TextField
@@ -82,6 +80,8 @@ export default function EditProfile() {
                 <EditActivities activities={inputFields.activities}
                                 handleActivitiesSelectionChange={handleActivitySelectionChange}/>
                 <Box sx={{height: "50px"}}></Box>
+
+                {notAllFieldsFilledError}
 
                 <Button type="submit" variant="outlined" color="inherit" size="medium">
                     Update Profile

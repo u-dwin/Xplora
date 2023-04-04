@@ -5,9 +5,7 @@ import {UserDetails} from "./UserDetails";
 import axios from "axios";
 
 export default function useEditProfile() {
-    const [firstNameError, setFirstNameError] = useState<string | boolean>(false)
-    const [lastNameError, setLastNameError] = useState<string | boolean>(false)
-    const [descriptionError, setDescriptionError] = useState<string | boolean>(false)
+    const [notAllFieldsFilledError, setNotAllFieldsFilledError] = useState<string | boolean>(false)
     const {userId} = useParams();
 
     const navigate = useNavigate();
@@ -29,6 +27,10 @@ export default function useEditProfile() {
                 console.log(error);
             });
     }, [userId]);
+
+    useEffect(() => {
+        setNotAllFieldsFilledError(false)
+    }, [inputFields])
 
     function handleFirstNameChange(evt: ChangeEvent<HTMLInputElement>) {
         setInputFields({...inputFields, firstName: evt.target.value})
@@ -63,14 +65,12 @@ export default function useEditProfile() {
             inputFields.activities.length > 1
     }
 
-    function validateDescription(description: string): boolean {
-        return description.trim().length > 30 && description.trim().length <= 300;
-    }
-
     function updateProfileFormSubmit(evt: React.FormEvent<HTMLFormElement>) {
         evt.preventDefault();
 
-        if (validateInputFields(inputFields) === true) {
+        if (validateInputFields(inputFields) === false) {
+            setNotAllFieldsFilledError("Please fill in all required fields")
+        } else {
             axios.put(`/api/users/profile/${userId}`, {
                 picture: "",
                 description: inputFields.description,
@@ -80,7 +80,7 @@ export default function useEditProfile() {
                 activities: inputFields.activities
             })
                 .then((response) => {
-                    navigate(`/edit-profile/${userId}`)
+                    navigate(`/update-profile-success`)
                 })
         }
     }
@@ -93,9 +93,7 @@ export default function useEditProfile() {
         handleDescriptionChange,
         handleActivitySelectionChange,
         handlePlacesSelectionChange,
-        firstNameError,
-        lastNameError,
-        descriptionError,
+        notAllFieldsFilledError,
         updateProfileFormSubmit
     }
 }
