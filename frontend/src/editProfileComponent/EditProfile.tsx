@@ -1,9 +1,10 @@
-import {Box, Button, Icon, TextField, Typography} from "@mui/material";
+import {Box, Button, IconButton, TextField, Typography} from "@mui/material";
 import useEditProfile from "./useEditProfile";
 import EditPlaces from "./EditPlaces";
 import EditActivities from "./EditActivities";
 import Avatar from '@mui/material/Avatar';
 import {DriveFolderUpload} from "@mui/icons-material";
+import {useRef} from "react";
 
 
 export default function EditProfile() {
@@ -17,6 +18,17 @@ export default function EditProfile() {
         handleDescriptionChange,
         updateProfileFormSubmit
     } = useEditProfile();
+
+    const fileInputRef = useRef<HTMLInputElement>(null);
+
+    function handleFileUpload() {
+        fileInputRef.current?.click();
+    }
+
+    function handleFileSelected(event: React.ChangeEvent<HTMLInputElement>) {
+        const file = event.target.files?.[0]
+        const reader = new FileReader()
+    }
 
 
     return (
@@ -63,8 +75,10 @@ export default function EditProfile() {
                         src="https://media.licdn.com/dms/image/D4E03AQGN7GwF9u-UTQ/profile-displayphoto-shrink_800_800/0/1679248833047?e=1686182400&v=beta&t=SkaZW7K3m0pKnMZa4_tcB8vlbfJQ_AneOscbP6nyoy8"
                         sx={{width: 70, height: 70}}
                     />
-                    <Icon><DriveFolderUpload/></Icon>
-
+                    <IconButton color="primary" aria-label="upload picture" component="label">
+                        <input hidden accept="image/*" type="file" onClick={handleFileUpload}/>
+                        <DriveFolderUpload/>
+                    </IconButton>
                 </Box>
 
                 <TextField
