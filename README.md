@@ -36,7 +36,7 @@ To run this project, you will need to add the following environment variables to
 ## Features
 
 - Registration/Sign Up
-- Profile edit (in development)
+- Profile edit 
 - Search (planned)
 - Profile view (planned)
 - Chat (planned)
