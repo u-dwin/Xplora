@@ -4,6 +4,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
@@ -15,11 +19,25 @@ class UserServiceTest {
     UserRepository userRepository = mock(UserRepository.class);
 
     UserIdService userIdService = mock(UserIdService.class);
-    UserService userService = new UserService(userRepository, userIdService);
 
-    UserDTO testUserDTO = new UserDTO("test_email_address", "test_password", "Traveler");
+    UserDetailsRepository userDetailsRepository = mock(UserDetailsRepository.class);
+    UserService userService = new UserService(userRepository, userIdService, userDetailsRepository);
 
-    User testUser = new User("1", "test_email_address", "test_password", "Traveler");
+    UserDTO testUserDTO = new UserDTO("test_email_address", "test_password", "traveler");
+
+    User testUser = new User("1", "test_email_address", "test_password", "traveler");
+
+    List<String> places = List.of("testplace1", "testplace2");
+
+    List<String> activities = List.of("testactivity1", "testactivity2");
+
+    List<String> empty = List.of("");
+    UserDetailsDTO testUserDetailsDTO = new UserDetailsDTO("link_to_picture", "description", "firstname", "lastname", places, activities);
+
+    UserDetails testUserDetails = new UserDetails("1", "traveler", "link_to_picture", "description", "firstname", "lastname", places, activities);
+
+    UserDetails testUserDetailsOptional = new UserDetails("1", "traveler", "", "", "", "", empty, empty);
+
 
     @Test
     void isAddUserAddingUser() {
@@ -44,4 +62,50 @@ class UserServiceTest {
                 userService.addUser(testUserDTO)
         );
     }
+
+    @Test
+    void isEditUserDetailsSavingNewUserDetailsCorrectly() {
+        when(userDetailsRepository.findById("1")).thenReturn(Optional.of(testUserDetailsOptional));
+
+
+        when(userDetailsRepository.save(testUserDetails)).
+                thenReturn(testUserDetails);
+
+
+        UserDetails actual = userService.editUserDetails(testUserDetailsDTO, "1");
+
+        assertEquals(testUserDetails, actual);
+    }
+
+    @Test
+    void isEditUserDetailsThrowingNoSuchElementExceptionIfUserDoesNotExists() {
+        when(userDetailsRepository.findById("1")).
+                thenReturn(Optional.empty());
+
+        assertThrows(ResponseStatusException.class, () ->
+                userService.editUserDetails(testUserDetailsDTO, "1")
+        );
+    }
+
+    @Test
+    void isSingleUserDetailsReturningSingleUserDetail() {
+        when(userDetailsRepository.findById("1")).thenReturn(Optional.of(testUserDetails));
+
+        UserDetails actual = userService.getUserDetails("1");
+
+        assertEquals(testUserDetails, actual);
+    }
+
+    @Test
+    void isSingleUserDetailsThrowingExceptionWhenNotFound() {
+        when(userDetailsRepository.findById("1")).
+                thenReturn(Optional.empty());
+
+        assertThrows(NoSuchElementException.class, () ->
+                userService.getUserDetails("1")
+        );
+
+    }
 }
+
+

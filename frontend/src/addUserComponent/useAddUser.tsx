@@ -37,8 +37,8 @@ export default function useAddUser() {
         return re.test(email);
     }
 
-    function validatePassword(inputField: string): boolean {
-        return inputField.trim().length > 5;
+    function validatePassword(password: string): boolean {
+        return password.trim().length > 5;
     }
 
     function handleEmailChange(evt: ChangeEvent<HTMLInputElement>) {
@@ -71,8 +71,9 @@ export default function useAddUser() {
                 userEmailAddress: addUser?.userEmailAddress,
                 userPassword: addUser?.userPassword
             })
-                .then(() => {
-                    navigate("/sign-up-success")
+                .then((response) => {
+                    const id = response.data.userId
+                    navigate(`/edit-profile/${id}`)
                 })
                 .catch((error) => console.error(error))
         } else if (!validateEmail(inputFields.email)) {

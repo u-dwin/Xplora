@@ -19,7 +19,6 @@ public class User {
 
     String userType;
 
-
     public User(UserDTO userRequestModel) {
         this.userEmailAddress = userRequestModel.userEmailAddress;
         this.userPassword = userRequestModel.userPassword;
