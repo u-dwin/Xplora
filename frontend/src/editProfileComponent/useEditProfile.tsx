@@ -1,5 +1,5 @@
 import * as React from "react";
-import {ChangeEvent, useEffect, useState} from "react";
+import {ChangeEvent, useEffect, useRef, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import {UserDetails} from "./UserDetails";
 import axios from "axios";
@@ -7,6 +7,8 @@ import axios from "axios";
 export default function useEditProfile() {
     const [notAllFieldsFilledError, setNotAllFieldsFilledError] = useState<string | boolean>(false)
     const {userId} = useParams();
+    const fileInputRef = useRef<HTMLInputElement>(null);
+    let profile_picture_url: string = ""
 
     const navigate = useNavigate();
     const [inputFields, setInputFields] = useState<UserDetails>({
@@ -65,6 +67,21 @@ export default function useEditProfile() {
             inputFields.activities.length > 0
     }
 
+    function handleFileUpload() {
+        fileInputRef.current?.click();
+    }
+
+    function handleFileSelected(event: React.ChangeEvent<HTMLInputElement>) {
+        const file = event.target.files?.[0];
+        if (file) {
+            axios.post("api/photos/add", file)
+                .then((response) => {
+                    profile_picture_url = response.data
+                    setInputFields({...inputFields, picture: profile_picture_url})
+                });
+        }
+    }
+
     function updateProfileFormSubmit(evt: React.FormEvent<HTMLFormElement>) {
         evt.preventDefault();
 
@@ -94,6 +111,9 @@ export default function useEditProfile() {
         handleActivitySelectionChange,
         handlePlacesSelectionChange,
         notAllFieldsFilledError,
-        updateProfileFormSubmit
+        updateProfileFormSubmit,
+        handleFileSelected,
+        handleFileUpload,
+        fileInputRef
     }
 }

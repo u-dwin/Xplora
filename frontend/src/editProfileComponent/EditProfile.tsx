@@ -4,7 +4,6 @@ import EditPlaces from "./EditPlaces";
 import EditActivities from "./EditActivities";
 import Avatar from '@mui/material/Avatar';
 import {DriveFolderUpload} from "@mui/icons-material";
-import {useRef} from "react";
 
 
 export default function EditProfile() {
@@ -16,19 +15,14 @@ export default function EditProfile() {
         inputFields,
         notAllFieldsFilledError,
         handleDescriptionChange,
-        updateProfileFormSubmit
+        updateProfileFormSubmit,
+        handleFileSelected,
+        fileInputRef,
+        handleFileUpload
     } = useEditProfile();
 
-    const fileInputRef = useRef<HTMLInputElement>(null);
 
-    function handleFileUpload() {
-        fileInputRef.current?.click();
-    }
 
-    function handleFileSelected(event: React.ChangeEvent<HTMLInputElement>) {
-        const file = event.target.files?.[0]
-        const reader = new FileReader()
-    }
 
 
     return (
