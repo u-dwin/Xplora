@@ -52,7 +52,7 @@ export default function EditProfile() {
                 value={inputFields.firstName}
                 onChange={handleFirstNameChange}
                 helperText={"Please enter a first name"}
-                inputProps={{maxLength: 30}}
+                inputProps={{maxLength: 15}}
                 required={true}
             />
                 <TextField
@@ -62,7 +62,7 @@ export default function EditProfile() {
                     value={inputFields.lastName}
                     onChange={handleLastNameChange}
                     helperText={"Please enter a last name"}
-                    inputProps={{maxLength: 30}}
+                    inputProps={{maxLength: 15}}
                     required={true}
                 />
                 <TextField

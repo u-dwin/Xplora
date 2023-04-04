@@ -58,18 +58,23 @@ export default function useEditProfile() {
 
 
     function validateInputFields(inputFields: UserDetails): boolean {
-        return inputFields.firstName.trim().length > 1 &&
-            inputFields.lastName.trim().length > 1 &&
-            inputFields.description.trim().length > 1 &&
-            inputFields.places.length > 1 &&
-            inputFields.activities.length > 1
+        return inputFields.firstName.trim().length > 0 &&
+            inputFields.lastName.trim().length > 0 &&
+            inputFields.description.trim().length > 0 &&
+            inputFields.places.length > 0 &&
+            inputFields.activities.length > 0
     }
 
     function updateProfileFormSubmit(evt: React.FormEvent<HTMLFormElement>) {
         evt.preventDefault();
 
-        if (validateInputFields(inputFields) === false) {
+        if (!validateInputFields(inputFields)) {
             setNotAllFieldsFilledError("Please fill in all required fields")
+            console.log(inputFields.activities.length)
+            console.log(inputFields.places.length)
+            console.log(inputFields.lastName.length)
+            console.log(inputFields.firstName.length)
+            console.log(inputFields.description.length)
         } else {
             axios.put(`/api/users/profile/${userId}`, {
                 picture: "",
@@ -79,7 +84,7 @@ export default function useEditProfile() {
                 places: inputFields.places,
                 activities: inputFields.activities
             })
-                .then((response) => {
+                .then(() => {
                     navigate(`/update-profile-success`)
                 })
         }
