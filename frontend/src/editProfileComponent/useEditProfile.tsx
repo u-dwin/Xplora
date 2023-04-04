@@ -70,11 +70,6 @@ export default function useEditProfile() {
 
         if (!validateInputFields(inputFields)) {
             setNotAllFieldsFilledError("Please fill in all required fields")
-            console.log(inputFields.activities.length)
-            console.log(inputFields.places.length)
-            console.log(inputFields.lastName.length)
-            console.log(inputFields.firstName.length)
-            console.log(inputFields.description.length)
         } else {
             axios.put(`/api/users/profile/${userId}`, {
                 picture: "",
