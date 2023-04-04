@@ -1,4 +1,4 @@
-import {Box, Button, TextField} from "@mui/material";
+import {Box, Button, TextField, Typography} from "@mui/material";
 import useEditProfile from "./useEditProfile";
 import EditPlaces from "./EditPlaces";
 import EditActivities from "./EditActivities";
@@ -79,9 +79,11 @@ export default function EditProfile() {
                 <EditPlaces places={inputFields.places} handlePlacesSelectionChange={handlePlacesSelectionChange}/>
                 <EditActivities activities={inputFields.activities}
                                 handleActivitiesSelectionChange={handleActivitySelectionChange}/>
-                <Box sx={{height: "50px"}}></Box>
+                <Box sx={{height: "5px"}}></Box>
 
-                {notAllFieldsFilledError}
+                <Typography>{notAllFieldsFilledError}</Typography>
+
+                <Box sx={{height: "5px"}}></Box>
 
                 <Button type="submit" variant="outlined" color="inherit" size="medium">
                     Update Profile
