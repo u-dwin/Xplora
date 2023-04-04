@@ -1,7 +1,9 @@
-import {Box, Button, TextField, Typography} from "@mui/material";
+import {Box, Button, Icon, TextField, Typography} from "@mui/material";
 import useEditProfile from "./useEditProfile";
 import EditPlaces from "./EditPlaces";
 import EditActivities from "./EditActivities";
+import Avatar from '@mui/material/Avatar';
+import {DriveFolderUpload} from "@mui/icons-material";
 
 
 export default function EditProfile() {
@@ -24,6 +26,7 @@ export default function EditProfile() {
             flexDirection: "column",
             flexWrap: "wrap",
             alignContent: "space-around",
+            alignItems: "center",
             rowGap: "5px"
         }}>
             <Box sx={{height: "50px"}}></Box>
@@ -39,22 +42,41 @@ export default function EditProfile() {
                         flexDirection: "column",
                         flexWrap: "wrap",
                         rowGap: "5px",
-                        justifyContent: "center"
+                        justifyContent: "center",
                     },
-            }}
+                }}
                 noValidate
                 autoComplete="off"
-        >
-            <TextField
-                size="small"
-                label="First Name"
-                id="outlined-size-normal"
-                value={inputFields.firstName}
-                onChange={handleFirstNameChange}
-                helperText={"Please enter a first name"}
-                inputProps={{maxLength: 15}}
-                required={true}
-            />
+            >
+
+                <Box
+                    sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        flexDirection: "row",
+                        columnGap: "25px",
+                        alignItems: "center"
+                    }}
+                >
+                    <Avatar
+                        alt="profile"
+                        src="https://media.licdn.com/dms/image/D4E03AQGN7GwF9u-UTQ/profile-displayphoto-shrink_800_800/0/1679248833047?e=1686182400&v=beta&t=SkaZW7K3m0pKnMZa4_tcB8vlbfJQ_AneOscbP6nyoy8"
+                        sx={{width: 70, height: 70}}
+                    />
+                    <Icon><DriveFolderUpload/></Icon>
+
+                </Box>
+
+                <TextField
+                    size="small"
+                    label="First Name"
+                    id="outlined-size-normal"
+                    value={inputFields.firstName}
+                    onChange={handleFirstNameChange}
+                    helperText={"Please enter a first name"}
+                    inputProps={{maxLength: 15}}
+                    required={true}
+                />
                 <TextField
                     size="small"
                     label="Last Name"
@@ -79,6 +101,7 @@ export default function EditProfile() {
                 <EditPlaces places={inputFields.places} handlePlacesSelectionChange={handlePlacesSelectionChange}/>
                 <EditActivities activities={inputFields.activities}
                                 handleActivitiesSelectionChange={handleActivitySelectionChange}/>
+
                 <Box sx={{height: "5px"}}></Box>
 
                 <Typography>{notAllFieldsFilledError}</Typography>
