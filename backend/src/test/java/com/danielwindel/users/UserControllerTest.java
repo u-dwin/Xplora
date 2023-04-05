@@ -39,6 +39,8 @@ class UserControllerTest {
 
     List<String> activities = List.of("testactivity1", "testactivity2");
 
+    List<UserDetails> userDetails;
+
     List<String> empty = List.of("");
     UserDetailsDTO testUserDetailsDTO = new UserDetailsDTO("link_to_picture", "description", "firstname", "lastname", places, activities);
 
@@ -89,5 +91,11 @@ class UserControllerTest {
                 .andExpect(MockMvcResultMatchers.status()
                         .isOk()).
                 andExpect(content().json(testUserDetailsJson));
+    }
+
+    @Test
+    @DirtiesContext
+    void isGetAllExpertsReturningAllExperts() throws Exception {
+        userDetails = userDetailsRepository.findAllByType("expert");
     }
 }

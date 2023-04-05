@@ -104,7 +104,6 @@ class UserServiceTest {
         assertThrows(NoSuchElementException.class, () ->
                 userService.getUserDetails("1")
         );
-
     }
 }
 
