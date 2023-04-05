@@ -1,4 +1,4 @@
-package com.danielwindel.places;
+package com.danielwindel.util.places;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.maps.GeoApiContext;

@@ -1,4 +1,4 @@
-package com.danielwindel.places;
+package com.danielwindel.util.places;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

@@ -1,4 +1,4 @@
-package com.danielwindel.places;
+package com.danielwindel.util.places;
 
 import com.google.maps.GeoApiContext;
 import com.google.maps.PlaceAutocompleteRequest;
@@ -12,9 +12,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.*;
 
 class PlaceServiceTest {
 
@@ -55,5 +55,41 @@ class PlaceServiceTest {
 
         List<String> expected = Arrays.asList("Berlin, Germany", "Berkeley, CA, USA");
         assertEquals(expected, actual);
+    }
+
+    @Test
+    void doesPlaceSearchHandleApiExceptionCorrectly() throws Exception {
+        doReturn(placeAutocompleteRequest).when(placesApiAutocompleteService).placeAutocomplete(
+                any(GeoApiContext.class),
+                any(String.class),
+                any(PlaceAutocompleteRequest.SessionToken.class)
+        );
+
+        doReturn(placeAutocompleteRequest).when(placeAutocompleteRequest).types((PlaceAutocompleteType.CITIES));
+
+        doThrow(ApiException.class).when(placesApiAutocompleteService).await(placeAutocompleteRequest);
+
+        placeService = new PlaceService(geoApiContext, placesApiAutocompleteService);
+
+        List<String> actual = placeService.search(placeDTO);
+
+        assertTrue(actual.isEmpty());
+    }
+
+    @Test
+    void doesPlaceSearchHandleIOExceptionCorrectly() throws Exception {
+        doReturn(placeAutocompleteRequest).when(placesApiAutocompleteService).placeAutocomplete(
+                any(GeoApiContext.class),
+                any(String.class),
+                any(PlaceAutocompleteRequest.SessionToken.class)
+        );
+
+        doReturn(placeAutocompleteRequest).when(placeAutocompleteRequest).types((PlaceAutocompleteType.CITIES));
+
+        doThrow(IOException.class).when(placesApiAutocompleteService).await(placeAutocompleteRequest);
+
+        List<String> results = placeService.search(placeDTO);
+
+        assertTrue(results.isEmpty());
     }
 }

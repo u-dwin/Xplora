@@ -1,7 +1,9 @@
-import {Box, Button, TextField, Typography} from "@mui/material";
+import {Box, Button, IconButton, TextField, Typography} from "@mui/material";
 import useEditProfile from "./useEditProfile";
 import EditPlaces from "./EditPlaces";
 import EditActivities from "./EditActivities";
+import Avatar from '@mui/material/Avatar';
+import {DriveFolderUpload} from "@mui/icons-material";
 
 
 export default function EditProfile() {
@@ -13,9 +15,10 @@ export default function EditProfile() {
         inputFields,
         notAllFieldsFilledError,
         handleDescriptionChange,
-        updateProfileFormSubmit
+        updateProfileFormSubmit,
+        handleFileSelected,
+        handleFileUpload
     } = useEditProfile();
-
 
     return (
         <Box sx={{
@@ -24,6 +27,7 @@ export default function EditProfile() {
             flexDirection: "column",
             flexWrap: "wrap",
             alignContent: "space-around",
+            alignItems: "center",
             rowGap: "5px"
         }}>
             <Box sx={{height: "50px"}}></Box>
@@ -39,22 +43,45 @@ export default function EditProfile() {
                         flexDirection: "column",
                         flexWrap: "wrap",
                         rowGap: "5px",
-                        justifyContent: "center"
+                        justifyContent: "center",
                     },
-            }}
+                }}
                 noValidate
                 autoComplete="off"
-        >
-            <TextField
-                size="small"
-                label="First Name"
-                id="outlined-size-normal"
-                value={inputFields.firstName}
-                onChange={handleFirstNameChange}
-                helperText={"Please enter a first name"}
-                inputProps={{maxLength: 15}}
-                required={true}
-            />
+            >
+
+                <Box
+                    sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        flexDirection: "row",
+                        columnGap: "25px",
+                        alignItems: "center"
+                    }}
+                >
+                    <Avatar
+                        alt="profile"
+                        src={inputFields.picture}
+                        sx={{width: 70, height: 70}}
+                    />
+                    <IconButton color="primary" aria-label="upload picture" component="label"
+                                onClick={handleFileUpload}>
+                        <input hidden accept="image/*" type="file" onInput={handleFileSelected}/>
+                        <DriveFolderUpload/>
+                    </IconButton>
+                </Box>
+                <Box sx={{height: "10px"}}></Box>
+
+                <TextField
+                    size="small"
+                    label="First Name"
+                    id="outlined-size-normal"
+                    value={inputFields.firstName}
+                    onChange={handleFirstNameChange}
+                    helperText={"Please enter a first name"}
+                    inputProps={{maxLength: 15}}
+                    required={true}
+                />
                 <TextField
                     size="small"
                     label="Last Name"
@@ -79,6 +106,7 @@ export default function EditProfile() {
                 <EditPlaces places={inputFields.places} handlePlacesSelectionChange={handlePlacesSelectionChange}/>
                 <EditActivities activities={inputFields.activities}
                                 handleActivitiesSelectionChange={handleActivitySelectionChange}/>
+
                 <Box sx={{height: "5px"}}></Box>
 
                 <Typography>{notAllFieldsFilledError}</Typography>
