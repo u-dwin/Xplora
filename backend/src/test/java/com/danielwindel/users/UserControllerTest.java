@@ -38,8 +38,6 @@ class UserControllerTest {
 
     List<String> activities = List.of("testactivity1", "testactivity2");
 
-    List<UserDetails> userDetails;
-
     List<String> empty = List.of("");
     UserDetailsDTO testUserDetailsDTO = new UserDetailsDTO("link_to_picture", "description", "firstname", "lastname", places, activities);
 
@@ -47,7 +45,11 @@ class UserControllerTest {
 
     UserDetails testUserDetailsEmpty = new UserDetails("1", "traveler", "", "", "", "", empty, empty);
 
-    List<UserDetails> testUserDetailsList = List.of(testUserDetails, testUserDetails);
+    UserDetails testUserDetailsExpert = new UserDetails("1", "expert", "link_to_picture", "description", "firstname", "lastname", places, activities);
+
+    UserDetails testUserDetailsExpert2 = new UserDetails("2", "expert", "link_to_picture", "description", "firstname", "lastname", places, activities);
+
+    List<UserDetails> testUserDetailsList = List.of(testUserDetailsExpert, testUserDetailsExpert2);
 
     @Test
     @DirtiesContext
@@ -97,9 +99,13 @@ class UserControllerTest {
     @Test
     @DirtiesContext
     void isGetAllExpertsReturningAllExperts() throws Exception {
-        userDetails = userDetailsRepository.findAllByType("expert");
 
         String testUserDetailsListJson = mapper.writeValueAsString(testUserDetailsList);
+
+        userDetailsRepository.save(testUserDetailsExpert);
+
+        userDetailsRepository.save(testUserDetailsExpert2);
+
 
         mockMvc.perform(MockMvcRequestBuilders
                         .get("/api/users/experts"))

@@ -29,6 +29,6 @@ public class UserController {
 
     @GetMapping("/experts")
     public List<UserDetails> getAllExpertDetails() {
-        return null;
+        return userService.getAllExperts();
     }
 }
