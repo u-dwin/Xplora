@@ -97,5 +97,10 @@ class UserControllerTest {
     @DirtiesContext
     void isGetAllExpertsReturningAllExperts() throws Exception {
         userDetails = userDetailsRepository.findAllByType("expert");
+
+        mockMvc.perform(MockMvcRequestBuilders
+                        .get("/api/users/profiles"))
+                .andExpect(MockMvcResultMatchers.status()
+                        .isOk());
     }
 }
