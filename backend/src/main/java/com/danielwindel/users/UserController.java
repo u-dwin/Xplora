@@ -27,8 +27,8 @@ public class UserController {
         return userService.getUserDetails(id);
     }
 
-    @GetMapping("/profiles")
-    public List<UserDetails> getAllUserDetails() {
+    @GetMapping("/experts")
+    public List<UserDetails> getAllExpertDetails() {
         return null;
     }
 }

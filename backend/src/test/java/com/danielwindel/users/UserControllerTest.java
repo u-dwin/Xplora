@@ -32,7 +32,6 @@ class UserControllerTest {
 
     ObjectMapper mapper = new ObjectMapper();
 
-
     UserDTO testUser = new UserDTO("test_email_address", "test_password", "traveler");
 
     List<String> places = List.of("testplace1", "testplace2");
@@ -47,6 +46,8 @@ class UserControllerTest {
     UserDetails testUserDetails = new UserDetails("1", "traveler", "link_to_picture", "description", "firstname", "lastname", places, activities);
 
     UserDetails testUserDetailsEmpty = new UserDetails("1", "traveler", "", "", "", "", empty, empty);
+
+    List<UserDetails> testUserDetailsList = List.of(testUserDetails, testUserDetails);
 
     @Test
     @DirtiesContext
@@ -98,9 +99,12 @@ class UserControllerTest {
     void isGetAllExpertsReturningAllExperts() throws Exception {
         userDetails = userDetailsRepository.findAllByType("expert");
 
+        String testUserDetailsListJson = mapper.writeValueAsString(testUserDetailsList);
+
         mockMvc.perform(MockMvcRequestBuilders
-                        .get("/api/users/profiles"))
+                        .get("/api/users/experts"))
                 .andExpect(MockMvcResultMatchers.status()
-                        .isOk());
+                        .isOk())
+                .andExpect(content().json(testUserDetailsListJson));
     }
 }
