@@ -4,7 +4,7 @@ import SignUp from "./addUserComponent/SignUp";
 import {Navigate, Route, Routes} from "react-router-dom";
 import UserDetailsSuccess from "./editProfileComponent/UserDetailsSuccess";
 import EditProfile from "./editProfileComponent/EditProfile";
-import SearchExperts from "./searchExpertsComponent/SearchExperts";
+import ExpertSearch from "./searchExpertsComponent/ExpertSearch";
 
 function App() {
     return (
@@ -14,7 +14,7 @@ function App() {
                 <Route path="/sign-up" element={<SignUp/>}/>
                 <Route path="/update-profile-success" element={<UserDetailsSuccess/>}/>
                 <Route path="/edit-profile/:userId" element={<EditProfile/>}/>
-                <Route path="/home" element={<SearchExperts/>}/>
+                <Route path="/home" element={<ExpertSearch/>}/>
             </Routes>
         </div>
     )
