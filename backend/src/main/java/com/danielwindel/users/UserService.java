@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -74,6 +75,10 @@ public class UserService {
         UserDetails singleUserDetails;
         singleUserDetails = singleUserDetailsOptional.get();
         return singleUserDetails;
+    }
+
+    public List<UserDetails> getAllExperts() {
+        return userDetailsRepository.findAllByType("expert");
     }
 }
 

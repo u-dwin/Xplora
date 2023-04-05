@@ -38,6 +38,8 @@ class UserServiceTest {
 
     UserDetails testUserDetailsOptional = new UserDetails("1", "traveler", "", "", "", "", empty, empty);
 
+    List<UserDetails> testUserDetailsList = List.of(testUserDetails, testUserDetails);
+
 
     @Test
     void isAddUserAddingUser() {
@@ -104,6 +106,16 @@ class UserServiceTest {
         assertThrows(NoSuchElementException.class, () ->
                 userService.getUserDetails("1")
         );
+    }
+
+    @Test
+    void isGetAllExpertsGettingAllExperts() {
+        when(userDetailsRepository.findAllByType("expert"))
+                .thenReturn(testUserDetailsList);
+
+        List<UserDetails> actual = userService.getAllExperts();
+
+        assertEquals(testUserDetailsList, actual);
     }
 }
 
