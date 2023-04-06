@@ -1,5 +1,6 @@
 package com.danielwindel.users;
 
+import com.danielwindel.util.ids.IdService;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
@@ -18,10 +19,10 @@ class UserServiceTest {
 
     UserRepository userRepository = mock(UserRepository.class);
 
-    UserIdService userIdService = mock(UserIdService.class);
+    IdService idService = mock(IdService.class);
 
     UserDetailsRepository userDetailsRepository = mock(UserDetailsRepository.class);
-    UserService userService = new UserService(userRepository, userDetailsRepository, userIdService);
+    UserService userService = new UserService(userRepository, userDetailsRepository, idService);
 
     UserDTO testUserDTO = new UserDTO("test_email_address", "test_password", "traveler");
 
@@ -47,7 +48,7 @@ class UserServiceTest {
         when(userRepository.save(testUser)).
                 thenReturn(testUser);
 
-        when(userIdService.generateId()).
+        when(idService.generateId()).
                 thenReturn("1");
 
         User actual = userService.addUser(testUserDTO);
