@@ -35,9 +35,6 @@ export default function ExpertCard(props: UserDetails) {
             rowGap: "5px",
             justifyContent: "center",
             width: "85%",
-            borderStyle: "dotted",
-            borderColor: "inherit",
-            borderWidth: "0.5px",
         }}>
 
             <Box sx={{height: "5px"}}></Box>
@@ -49,9 +46,6 @@ export default function ExpertCard(props: UserDetails) {
                     flexDirection: "row",
                     columnGap: "5px",
                     alignItems: "top",
-                    borderStyle: "solid",
-                    borderColour: "inherit",
-                    borderWidth: "0.5px"
                 }}>
                 <Avatar
                     alt="profile"
