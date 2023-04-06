@@ -7,6 +7,10 @@ import {UserDetails} from "../editProfileComponent/UserDetails";
 
 export default function ExpertCard(props: UserDetails) {
 
+    const maxCharLength: number = 100;
+    const trimmedDescription: string = props.description.substring(0, maxCharLength)
+
+
     return (
         <Box sx={{
             display: "flex",
@@ -28,20 +32,33 @@ export default function ExpertCard(props: UserDetails) {
                     justifyContent: "left",
                     flexDirection: "row",
                     columnGap: "5px",
-                    alignItems: "center",
+                    alignItems: "top",
                     borderStyle: "solid",
                     borderColour: "inherit",
                     borderWidth: "0.5px"
                 }}>
-                    <Avatar
-                        alt="profile"
-                        src={props.picture}
-                        sx={{width: 55, height: 55}}
-                    />
-                <Typography>
-                    {props.firstName}
-                    {props.lastName}
-                </Typography>
+                <Avatar
+                    alt="profile"
+                    src={props.picture}
+                    sx={{width: 55, height: 55}}
+                />
+                <Box>
+
+                    <Typography sx={{fontSize: 15}}>
+                        {props.firstName}
+                        {" "}
+                        {props.lastName}
+                    </Typography>
+                    <Typography sx={{fontSize: 12}}>
+                        {trimmedDescription}...
+                    </Typography>
+                    <Typography sx={{fontSize: 12}}>
+                        {props.places}
+                    </Typography>
+                    <Typography sx={{fontSize: 12}}>
+                        {props.activities}
+                    </Typography>
+                </Box>
 
             </Box>
             <Box sx={{height: "5px"}}></Box>
