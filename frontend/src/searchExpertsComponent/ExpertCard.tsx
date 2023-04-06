@@ -44,7 +44,7 @@ export default function ExpertCard(props: UserDetails) {
                 />
                 <Box>
 
-                    <Typography sx={{fontSize: 15}}>
+                    <Typography sx={{fontSize: 13, fontWeight: 500}}>
                         {props.firstName}
                         {" "}
                         {props.lastName}
