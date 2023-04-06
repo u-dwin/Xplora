@@ -28,27 +28,20 @@ class ChatControllerTest {
     GeoApiContext geoApiContext;
 
     ObjectMapper mapper = new ObjectMapper();
-
-    String testUserId1 = "1";
-
-    String testUserId2 = "2";
-
-    String[] participants = new String[]{testUserId1, testUserId2};
-
-    ChatDTO testChat = new ChatDTO(participants);
+    ChatDTO testChatDTO = new ChatDTO();
 
     @Test
     @DirtiesContext
     void chatCreateReturnsCreatedChat() throws Exception {
-        String testChatJson = mapper.writeValueAsString(testChat);
+        String testChatDTOJson = mapper.writeValueAsString(testChatDTO);
 
         mockMvc.perform(MockMvcRequestBuilders
                         .post("/api/chats/add")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(testChatJson))
+                        .content(testChatDTOJson))
                 .andExpect(MockMvcResultMatchers.
                         status()
                         .isOk())
-                .andExpect(content().json(testChatJson));
+                .andExpect(content().json(testChatDTOJson));
     }
 }

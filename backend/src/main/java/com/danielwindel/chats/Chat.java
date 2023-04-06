@@ -15,4 +15,8 @@ public class Chat {
     private String id;
     private Message[] messages;
     private String[] participants;
+
+    public Chat(ChatDTO chatDTO) {
+        this.participants = chatDTO.getParticipants();
+    }
 }
