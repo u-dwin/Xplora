@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Avatar from "@mui/material/Avatar";
 import {UserDetails} from "../editProfileComponent/UserDetails";
+import Tag from "./Tag";
 
 
 export default function ExpertCard(props: UserDetails) {
@@ -10,6 +11,21 @@ export default function ExpertCard(props: UserDetails) {
     const maxCharLength: number = 100;
     const trimmedDescription: string = props.description.substring(0, maxCharLength)
 
+    const placeTags = props.places.map((place: string) => {
+        return (
+            <>
+                <Tag tagName={place}></Tag>{" "}
+            </>
+        )
+    })
+
+    const activitiesTags = props.activities.map((activities: string) => {
+        return (
+            <>
+                <Tag tagName={activities}></Tag>{" "}
+            </>
+        )
+    })
 
     return (
         <Box sx={{
@@ -52,16 +68,38 @@ export default function ExpertCard(props: UserDetails) {
                     <Typography sx={{fontSize: 12}}>
                         {trimmedDescription}...
                     </Typography>
-                    <Typography sx={{fontSize: 12}}>
-                        {props.places}
-                    </Typography>
-                    <Typography sx={{fontSize: 12}}>
-                        {props.activities}
-                    </Typography>
                 </Box>
-
             </Box>
-            <Box sx={{height: "5px"}}></Box>
+            <Box
+                sx={{
+                    display: "flex",
+                    justifyContent: "left",
+                    flexDirection: "row",
+                    flexWrap: "wrap",
+                    columnGap: "5px",
+                    rowGap: "5px",
+                    alignItems: "top",
+                    borderStyle: "solid",
+                    borderColour: "inherit",
+                    borderWidth: "0.5px"
+                }}>
+                {placeTags}
+            </Box>
+            <Box
+                sx={{
+                    display: "flex",
+                    justifyContent: "left",
+                    flexDirection: "row",
+                    flexWrap: "wrap",
+                    columnGap: "5px",
+                    rowGap: "5px",
+                    alignItems: "top",
+                    borderStyle: "solid",
+                    borderColour: "inherit",
+                    borderWidth: "0.5px"
+                }}>
+                {activitiesTags}
+            </Box>
         </Box>
     );
 }
