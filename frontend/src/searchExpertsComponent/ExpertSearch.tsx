@@ -1,6 +1,5 @@
 import {Box} from "@mui/material";
 import TextField from "@mui/material/TextField";
-import SearchIcon from '@mui/icons-material/Search';
 import {UserDetails} from "../editProfileComponent/UserDetails";
 import axios from "axios";
 import {useEffect, useState} from "react";
@@ -31,8 +30,11 @@ export default function ExpertSearch() {
             flexDirection: "column",
             flexWrap: "wrap",
             rowGap: "5px",
+            width: "100%",
+            alignItems: "center",
+            alignContent: "center",
             justifyContent: "center",
-            width: "100%"
+            justifyItems: "center"
         }}>
 
             <Box sx={{height: "20px"}}></Box>
@@ -45,12 +47,19 @@ export default function ExpertSearch() {
                     columnGap: "5px",
                     justifyItems: "center",
                     alignItems: "center",
-                    width: "100%"
+                    width: "85%",
                 }}
             >
-                <SearchIcon fontSize="large"/>
-                <TextField id="outlined-search" label="" type="search"/>
+                <TextField id="outlined-search"
+                           label=""
+                           type="search"
+                           size="small"
+                           fullWidth
+                           placeholder="Search for places and activities..."
+                />
+
             </Box>
+
             {expertCard}
         </Box>
 
