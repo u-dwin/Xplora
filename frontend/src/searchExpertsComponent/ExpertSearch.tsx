@@ -7,22 +7,37 @@ import ExpertCard from "./ExpertCard";
 
 
 export default function ExpertSearch() {
-    const [users, setUsers] = useState<UserDetails[]>([]);
+    const [experts, setExperts] = useState<UserDetails[]>([]);
+    const [searchQuery, setSearchQuery] = useState<string>("");
 
     useEffect(() => {
         axios.get("/api/users/experts").then((response) => {
             if (response.data) {
-                setUsers(response.data);
+                setExperts(response.data);
             }
         })
     }, [])
 
-    const expertCard = users.map((expert: UserDetails) => {
-        return (
-            <ExpertCard picture={expert.picture} description={expert.description} firstName={expert.firstName}
-                        lastName={expert.lastName} places={expert.places} activities={expert.activities}></ExpertCard>
-        )
-    })
+    const expertCards = experts
+        .filter((expert: UserDetails) => {
+            const words = searchQuery.toLowerCase().split(" ");
+            return words.every(word =>
+                expert.places.toString().toLowerCase().includes(word) ||
+                expert.activities.toString().toLowerCase().includes(word) ||
+                expert.description.toString().toLowerCase().includes(word)
+            );
+        })
+        .map((expert: UserDetails) => {
+            return (
+                <ExpertCard picture={expert.picture} description={expert.description} firstName={expert.firstName}
+                            lastName={expert.lastName} places={expert.places}
+                            activities={expert.activities}></ExpertCard>
+            )
+        })
+
+    const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchQuery(event.target.value);
+    };
 
     return (
         <Box sx={{
@@ -56,11 +71,13 @@ export default function ExpertSearch() {
                            size="small"
                            fullWidth
                            placeholder="Search for places and activities..."
+                           value={searchQuery}
+                           onChange={handleSearchChange}
                 />
 
             </Box>
 
-            {expertCard}
+            {expertCards}
         </Box>
 
     )
