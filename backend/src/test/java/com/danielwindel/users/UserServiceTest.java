@@ -21,7 +21,7 @@ class UserServiceTest {
     UserIdService userIdService = mock(UserIdService.class);
 
     UserDetailsRepository userDetailsRepository = mock(UserDetailsRepository.class);
-    UserService userService = new UserService(userRepository, userIdService, userDetailsRepository);
+    UserService userService = new UserService(userRepository, userDetailsRepository, userIdService);
 
     UserDTO testUserDTO = new UserDTO("test_email_address", "test_password", "traveler");
 
@@ -37,6 +37,8 @@ class UserServiceTest {
     UserDetails testUserDetails = new UserDetails("1", "traveler", "link_to_picture", "description", "firstname", "lastname", places, activities);
 
     UserDetails testUserDetailsOptional = new UserDetails("1", "traveler", "", "", "", "", empty, empty);
+
+    List<UserDetails> testUserDetailsList = List.of(testUserDetails, testUserDetails);
 
 
     @Test
@@ -104,7 +106,16 @@ class UserServiceTest {
         assertThrows(NoSuchElementException.class, () ->
                 userService.getUserDetails("1")
         );
+    }
 
+    @Test
+    void isGetAllExpertsGettingAllExperts() {
+        when(userDetailsRepository.findAllByType("expert"))
+                .thenReturn(testUserDetailsList);
+
+        List<UserDetails> actual = userService.getAllExperts();
+
+        assertEquals(testUserDetailsList, actual);
     }
 }
 

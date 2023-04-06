@@ -1,26 +1,22 @@
 package com.danielwindel.users;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
-
     private final UserRepository userRepository;
 
     private final UserDetailsRepository userDetailsRepository;
     private final UserIdService userIdService;
-
-    public UserService(UserRepository userRepository, UserIdService userIdService, UserDetailsRepository userDetailsRepository) {
-        this.userRepository = userRepository;
-        this.userIdService = userIdService;
-        this.userDetailsRepository = userDetailsRepository;
-    }
 
     public User addUser(UserDTO userDTO) {
         User user = new User(userDTO);
@@ -79,6 +75,10 @@ public class UserService {
         UserDetails singleUserDetails;
         singleUserDetails = singleUserDetailsOptional.get();
         return singleUserDetails;
+    }
+
+    public List<UserDetails> getAllExperts() {
+        return userDetailsRepository.findAllByType("expert");
     }
 }
 

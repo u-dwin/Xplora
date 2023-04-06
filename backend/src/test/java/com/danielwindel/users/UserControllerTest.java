@@ -32,7 +32,6 @@ class UserControllerTest {
 
     ObjectMapper mapper = new ObjectMapper();
 
-
     UserDTO testUser = new UserDTO("test_email_address", "test_password", "traveler");
 
     List<String> places = List.of("testplace1", "testplace2");
@@ -45,6 +44,12 @@ class UserControllerTest {
     UserDetails testUserDetails = new UserDetails("1", "traveler", "link_to_picture", "description", "firstname", "lastname", places, activities);
 
     UserDetails testUserDetailsEmpty = new UserDetails("1", "traveler", "", "", "", "", empty, empty);
+
+    UserDetails testUserDetailsExpert = new UserDetails("1", "expert", "link_to_picture", "description", "firstname", "lastname", places, activities);
+
+    UserDetails testUserDetailsExpert2 = new UserDetails("2", "expert", "link_to_picture", "description", "firstname", "lastname", places, activities);
+
+    List<UserDetails> testUserDetailsList = List.of(testUserDetailsExpert, testUserDetailsExpert2);
 
     @Test
     @DirtiesContext
@@ -89,5 +94,23 @@ class UserControllerTest {
                 .andExpect(MockMvcResultMatchers.status()
                         .isOk()).
                 andExpect(content().json(testUserDetailsJson));
+    }
+
+    @Test
+    @DirtiesContext
+    void isGetAllExpertsReturningAllExperts() throws Exception {
+
+        String testUserDetailsListJson = mapper.writeValueAsString(testUserDetailsList);
+
+        userDetailsRepository.save(testUserDetailsExpert);
+
+        userDetailsRepository.save(testUserDetailsExpert2);
+
+
+        mockMvc.perform(MockMvcRequestBuilders
+                        .get("/api/users/experts"))
+                .andExpect(MockMvcResultMatchers.status()
+                        .isOk())
+                .andExpect(content().json(testUserDetailsListJson));
     }
 }

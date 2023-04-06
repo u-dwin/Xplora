@@ -1,16 +1,16 @@
 package com.danielwindel.users;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
+@RequiredArgsConstructor
 public class UserController {
 
     private final UserService userService;
-
-    UserController(UserService userService) {
-        this.userService = userService;
-    }
 
     @PostMapping("/add")
     public User addUser(@RequestBody UserDTO userRequestModel) {
@@ -25,5 +25,10 @@ public class UserController {
     @GetMapping("/profile/{id}")
     public UserDetails getUserDetails(@PathVariable String id) {
         return userService.getUserDetails(id);
+    }
+
+    @GetMapping("/experts")
+    public List<UserDetails> getAllExpertDetails() {
+        return userService.getAllExperts();
     }
 }
