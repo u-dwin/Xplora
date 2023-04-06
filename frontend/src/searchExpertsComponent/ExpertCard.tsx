@@ -53,7 +53,6 @@ export default function ExpertCard(props: UserDetails) {
                     sx={{width: 55, height: 55}}
                 />
                 <Box>
-
                     <Typography sx={{fontSize: 13, fontWeight: 500}}>
                         {props.firstName}
                         {" "}
