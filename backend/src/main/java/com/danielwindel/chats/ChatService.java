@@ -1,8 +1,10 @@
 package com.danielwindel.chats;
 
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+@AllArgsConstructor
 @Service
-public class ChatService extends TextWebSocketHandler {
+public class ChatService {
+    private final ChatRepository chatRepository;
 }
