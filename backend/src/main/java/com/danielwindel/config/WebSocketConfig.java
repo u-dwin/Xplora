@@ -19,7 +19,7 @@ public class WebSocketConfig implements WebSocketConfigurer {
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
         registry
-                .addHandler(webSocketChatHandler, "api/ws/chat")
+                .addHandler(webSocketChatHandler, "api/ws/chat/{id}")
                 .setAllowedOrigins("*");
     }
 }
