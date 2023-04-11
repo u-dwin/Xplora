@@ -19,6 +19,5 @@ public class ChatService {
         chat.setMessages(messages);
 
         return chatRepository.save(chat);
-
     }
 }

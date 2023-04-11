@@ -32,6 +32,4 @@ public class UserDetails {
         this.places = userDetailsDTO.getPlaces();
         this.activities = userDetailsDTO.getActivities();
     }
-
-
 }
