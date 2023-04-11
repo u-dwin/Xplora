@@ -99,7 +99,7 @@ export default function useEditProfile() {
                 activities: inputFields.activities
             })
                 .then(() => {
-                    navigate(`/update-profile-success`)
+                    navigate(`/home`)
                 })
         }
     }
