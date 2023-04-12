@@ -3,6 +3,7 @@ package com.danielwindel.chats;
 import com.danielwindel.util.ids.IdService;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -21,7 +22,7 @@ class ChatServiceTest {
 
     String testUserId2 = "2";
 
-    Message message = new Message("1", "First Message", "1");
+    Message message = new Message("1", "First Message", "1", LocalDateTime.now());
 
     String[] participants = new String[]{testUserId1, testUserId2};
 
@@ -31,9 +32,9 @@ class ChatServiceTest {
         add(message);
     }};
 
-    Chat testChat = new Chat("3", messagesWithMessage, participants);
+    Chat testChat = new Chat("3", messages, participants);
 
-    Chat testChatWithMessage = new Chat("3", messages, participants);
+    Chat testChatWithMessage = new Chat("3", messagesWithMessage, participants);
 
     ChatDTO testChatDTO = new ChatDTO(participants);
 

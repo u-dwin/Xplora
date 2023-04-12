@@ -8,6 +8,7 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import java.net.URI;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +17,8 @@ import java.util.List;
 public class WebSocketChatHandler extends TextWebSocketHandler {
 
     private final List<WebSocketSession> openSessions = new ArrayList<>();
+
+    private final ChatService chatService;
 
     @Override
     public void afterConnectionEstablished(WebSocketSession webSocketSession) {
@@ -34,6 +37,10 @@ public class WebSocketChatHandler extends TextWebSocketHandler {
     @Override
     public void handleTextMessage(WebSocketSession session, TextMessage textMessage) throws Exception {
         String chatId = (String) session.getAttributes().get("id");
+
+        Message message = new Message(chatId, textMessage.getPayload(), "", LocalDateTime.now());
+
+        chatService.updateChat(message);
 
         for (WebSocketSession openSession : openSessions) {
             String openSessionId = (String) openSession.getAttributes().get("id");
