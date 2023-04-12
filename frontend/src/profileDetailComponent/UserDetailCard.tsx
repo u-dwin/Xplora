@@ -1,5 +1,5 @@
 import {useLocation} from "react-router-dom";
-import {Box, Typography} from "@mui/material";
+import {Box, Button, Typography} from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import * as React from "react";
 import Tag from "../searchExpertsComponent/Tag";
@@ -39,12 +39,15 @@ export default function UserDetailCard() {
                 display: "flex",
                 flexDirection: "column",
                 flexWrap: "wrap",
-                rowGap: "5px",
+                rowGap: "20px",
                 justifyContent: "center",
-                width: "85%",
+                width: "30ch",
+                border: "solid",
+                borderWidth: "2px",
+                alignItems: "center"
             }}>
 
-                <Box sx={{height: "5px"}}></Box>
+                <Box sx={{height: "50px"}}></Box>
 
                 <Box
                     sx={{
@@ -55,13 +58,14 @@ export default function UserDetailCard() {
                         alignItems: "center",
                         justifyItems: "center"
                     }}>
-
+                    <Box sx={{height: "5px"}}></Box>
                     <Avatar
                         alt="profile"
                         src={user.picture}
                         sx={{width: 85, height: 85}}
                     />
-                    <Typography sx={{fontSize: 14, fontWeight: 500}}>
+                    <Box sx={{height: "5px"}}></Box>
+                    <Typography sx={{fontSize: 14, fontWeight: 550}}>
                         {user.firstName}
                         {" "}
                         {user.lastName}
@@ -87,7 +91,11 @@ export default function UserDetailCard() {
                     }}>
                     {placeTags}
                     {activitiesTags}
+                    <Box sx={{height: "50px"}}></Box>
                 </Box>
+                <Button variant="outlined" color="inherit" size="medium" sx={{width: "25ch"}}>
+                    Start Chat
+                </Button>
             </Box>
         </Box>
     )
