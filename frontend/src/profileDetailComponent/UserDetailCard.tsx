@@ -41,7 +41,7 @@ export default function UserDetailCard() {
                 flexWrap: "wrap",
                 rowGap: "20px",
                 justifyContent: "center",
-                width: "30ch",
+                width: "35ch",
                 border: "solid",
                 borderWidth: "2px",
                 alignItems: "center"

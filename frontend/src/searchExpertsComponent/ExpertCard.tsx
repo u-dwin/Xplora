@@ -40,7 +40,8 @@ export default function ExpertCard(props: UserDetails) {
                 flexWrap: "wrap",
                 rowGap: "5px",
                 justifyContent: "center",
-                width: "85%",
+                justifyItems: "center",
+                width: "95%",
             }}>
 
                 <Box sx={{height: "5px"}}></Box>
@@ -51,7 +52,7 @@ export default function ExpertCard(props: UserDetails) {
                         justifyContent: "left",
                         flexDirection: "row",
                         columnGap: "5px",
-                        alignItems: "top",
+                        alignItems: "center",
                     }}>
                     <Avatar
                         alt="profile"
@@ -59,7 +60,7 @@ export default function ExpertCard(props: UserDetails) {
                         sx={{width: 55, height: 55}}
                     />
                     <Box>
-                        <Typography sx={{fontSize: 13, fontWeight: 500}}>
+                        <Typography sx={{fontSize: 13, fontWeight: 525}}>
                             {props.firstName}
                             {" "}
                             {props.lastName}

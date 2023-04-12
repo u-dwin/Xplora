@@ -60,7 +60,7 @@ export default function ExpertSearch() {
                 sx={{
                     display: "flex",
                     justifyContent: "center",
-                    flexDirection: "row",
+                    flexDirection: "column",
                     columnGap: "5px",
                     justifyItems: "center",
                     alignItems: "center",
@@ -76,10 +76,8 @@ export default function ExpertSearch() {
                            value={searchQuery}
                            onChange={handleSearchChange}
                 />
-
+                {expertCards}
             </Box>
-
-            {expertCards}
         </Box>
 
     )
