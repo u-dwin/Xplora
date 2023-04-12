@@ -42,8 +42,6 @@ export default function UserDetailCard() {
                 rowGap: "20px",
                 justifyContent: "center",
                 width: "35ch",
-                border: "solid",
-                borderWidth: "2px",
                 alignItems: "center"
             }}>
 
