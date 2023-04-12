@@ -8,5 +8,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 public class Message {
+    private String chatId;
+
     private String content;
+
+    private String userId;
 }
