@@ -23,10 +23,13 @@ public class WebSocketChatHandler extends TextWebSocketHandler {
     @Override
     public void afterConnectionEstablished(WebSocketSession webSocketSession) {
         URI webSocketUri = webSocketSession.getUri();
+
         if (webSocketUri != null) {
             try {
-                String id = webSocketUri.toString().split("api/ws/chat/")[1];
+                String id = webSocketUri.getPath().split("api/ws/chat/")[1];
+                String userId = webSocketUri.getQuery().split("userId=")[1];
                 webSocketSession.getAttributes().put("id", id);
+                webSocketSession.getAttributes().put("userId", userId);
             } catch (Exception e) {
                 throw new NullPointerException("The chat id is not existent");
             }
@@ -37,8 +40,9 @@ public class WebSocketChatHandler extends TextWebSocketHandler {
     @Override
     public void handleTextMessage(WebSocketSession session, TextMessage textMessage) throws Exception {
         String chatId = (String) session.getAttributes().get("id");
+        String userId = (String) session.getAttributes().get("userId");
 
-        Message message = new Message(chatId, textMessage.getPayload(), "", LocalDateTime.now());
+        Message message = new Message(chatId, textMessage.getPayload(), userId, LocalDateTime.now());
 
         chatService.updateChat(message);
 
