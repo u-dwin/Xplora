@@ -18,6 +18,7 @@ public class UserController {
     }
 
     @PutMapping("/profile/{id}")
+    @ResponseBody
     public UserDetails editUserDetails(@PathVariable String id, @RequestBody UserDetailsDTO userDetailsDTO) {
         return userService.editUserDetails(userDetailsDTO, id);
     }
