@@ -1,7 +1,7 @@
 import {Box, TextField} from "@mui/material";
 
-
 export default function ChatComponent() {
+
     return (
         <Box sx={{
             display: "flex",

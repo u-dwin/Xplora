@@ -1,4 +1,4 @@
-import {useLocation} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import {Box, Button, Typography} from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import * as React from "react";
@@ -8,14 +8,19 @@ import axios from "axios";
 
 export default function UserDetailCard() {
     const location = useLocation()
+    const navigate = useNavigate();
     const user = location.state.user
     const travelerId: string | undefined = Cookies.get("userId")
     const expertId: string = user.userId
-    
+
     function handleStartChatClick() {
         axios.post("/api/chats/add", {
             "participants": [travelerId, expertId]
-        }).then()
+        }).then((response) => {
+            const id = response.data.id
+            navigate(`/chat/${id}`)
+        })
+            .catch((error) => console.error(error))
     }
 
 

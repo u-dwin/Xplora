@@ -6,7 +6,6 @@ import UserDetailsSuccess from "./editProfileComponent/UserDetailsSuccess";
 import EditProfile from "./editProfileComponent/EditProfile";
 import ExpertSearch from "./searchExpertsComponent/ExpertSearch";
 import UserDetailCard from "./profileDetailComponent/UserDetailCard";
-import {Chat} from "@mui/icons-material";
 import ChatComponent from "./chatComponent/ChatComponent";
 
 function App() {
@@ -19,7 +18,7 @@ function App() {
                 <Route path="/edit-profile/:userId" element={<EditProfile/>}/>
                 <Route path="/home" element={<ExpertSearch/>}/>
                 <Route path="/userDetail" element={<UserDetailCard/>}/>
-                <Route path="/chat" element={<ChatComponent/>}/>
+                <Route path="/chat/:id" element={<ChatComponent/>}/>
             </Routes>
         </div>
     )
