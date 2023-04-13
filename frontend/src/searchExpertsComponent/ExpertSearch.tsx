@@ -28,12 +28,12 @@ export default function ExpertSearch() {
             );
         })
         .map((expert: UserDetails) => {
-            const key = `${expert.firstName}-${expert.lastName}-${expert.description}-${expert.places}-${expert.activities}`;
+            const key = `${expert.firstName}-${expert.lastName}-${expert.description}-${expert.places}-${expert.activities}-${expert.userId}`;
             return (
                 <ExpertCard key={key} picture={expert.picture} description={expert.description}
                             firstName={expert.firstName}
                             lastName={expert.lastName} places={expert.places}
-                            activities={expert.activities}></ExpertCard>
+                            activities={expert.activities} userId={expert.userId}/>
             )
         })
 

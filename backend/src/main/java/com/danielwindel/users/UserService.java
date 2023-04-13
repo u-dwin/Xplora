@@ -25,7 +25,7 @@ public class UserService {
 
         user.setUserId(idService.generateId());
 
-        userDetails.setUserID(user.userId);
+        userDetails.setUserId(user.userId);
 
         userDetails.setType(userDTO.userType);
 
@@ -53,7 +53,7 @@ public class UserService {
 
         UserDetails userDetails = new UserDetails(userDetailsDTO);
         Optional<UserDetails> oldUserDetails = userDetailsRepository.findById(id);
-        userDetails.setUserID(id);
+        userDetails.setUserId(id);
 
         try {
             if (oldUserDetails.isEmpty()) {

@@ -3,10 +3,21 @@ import {Box, Button, Typography} from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import * as React from "react";
 import Tag from "../searchExpertsComponent/Tag";
+import Cookies from "js-cookie";
+import axios from "axios";
 
 export default function UserDetailCard() {
     const location = useLocation()
     const user = location.state.user
+    const travelerId: string | undefined = Cookies.get("userId")
+    const expertId: string = user.userId
+    
+    function handleStartChatClick() {
+        axios.post("/api/chats/add", {
+            "participants": [travelerId, expertId]
+        }).then()
+    }
+
 
     const placeTags = user.places.map((place: string) => {
         return (
@@ -91,7 +102,8 @@ export default function UserDetailCard() {
                     {activitiesTags}
                     <Box sx={{height: "50px"}}></Box>
                 </Box>
-                <Button variant="outlined" color="inherit" size="medium" sx={{width: "25ch"}}>
+                <Button onClick={handleStartChatClick} variant="outlined" color="inherit" size="medium"
+                        sx={{width: "25ch"}}>
                     Start Chat
                 </Button>
             </Box>

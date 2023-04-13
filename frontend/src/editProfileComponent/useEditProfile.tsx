@@ -19,6 +19,7 @@ export default function useEditProfile() {
         lastName: "",
         places: [],
         activities: [],
+        userId: ""
     })
 
     useEffect(() => {
