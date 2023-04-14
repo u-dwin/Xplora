@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -46,5 +47,9 @@ public class ChatService {
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.CONFLICT);
         }
+    }
+
+    public List<Chat> getChatsWithParticipantId(String id) {
+        return chatRepository.findAllByParticipants(id);
     }
 }
