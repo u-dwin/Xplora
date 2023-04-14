@@ -55,6 +55,7 @@ public class WebSocketChatHandler extends TextWebSocketHandler {
 
         Map<String, String> messageData = new HashMap<>();
 
+        messageData.put("userId", userId);
         messageData.put("time", timeNow.toString());
         messageData.put("text", textMessage.getPayload());
 
