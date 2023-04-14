@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 class WebSocketChatHandlerTest {
@@ -64,5 +65,16 @@ class WebSocketChatHandlerTest {
 
         assertEquals(chatId, mockSessionAttributes.get("id"));
         assertEquals(userId, mockSessionAttributes.get("userId"));
+    }
+
+    @Test
+    void testAfterConnectionEstablished_NullPointerExceptionThrown() throws Exception {
+        WebSocketSession mockSession = mock(WebSocketSession.class);
+        URI uri = new URI("http://localhost:8080/api/ws/chat/");
+
+        when(mockSession.getUri()).thenReturn(uri);
+
+        assertThrows(NullPointerException.class, () ->
+                handler.afterConnectionEstablished(mockSession));
     }
 }
