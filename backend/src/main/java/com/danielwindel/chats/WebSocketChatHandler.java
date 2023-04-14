@@ -1,5 +1,6 @@
 package com.danielwindel.chats;
 
+import com.danielwindel.util.dateTime.DateTime;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.socket.CloseStatus;
@@ -19,6 +20,8 @@ public class WebSocketChatHandler extends TextWebSocketHandler {
     private final List<WebSocketSession> openSessions = new ArrayList<>();
 
     private final ChatService chatService;
+
+    private final DateTime dateTime;
 
     @Override
     public void afterConnectionEstablished(WebSocketSession webSocketSession) {
@@ -41,8 +44,9 @@ public class WebSocketChatHandler extends TextWebSocketHandler {
     public void handleTextMessage(WebSocketSession session, TextMessage textMessage) throws Exception {
         String chatId = (String) session.getAttributes().get("id");
         String userId = (String) session.getAttributes().get("userId");
+        LocalDateTime timeNow = dateTime.getCurrentTime();
 
-        Message message = new Message(chatId, textMessage.getPayload(), userId, LocalDateTime.now());
+        Message message = new Message(chatId, textMessage.getPayload(), userId, timeNow);
 
         chatService.updateChat(message);
 
