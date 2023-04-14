@@ -2,6 +2,8 @@ package com.danielwindel.chats;
 
 import com.danielwindel.util.ids.IdService;
 import org.junit.jupiter.api.Test;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -9,6 +11,8 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -77,4 +81,25 @@ class ChatServiceTest {
 
         assertEquals(testChatList, actual);
     }
+
+    @Test
+    void isUpdateChatThrowingExceptionWhenIdCannotBeFound() {
+        when(chatRepository.findById("1")).
+                thenReturn(Optional.empty());
+
+        assertThrows(ResponseStatusException.class, () ->
+                chatService.updateChat(message)
+        );
+    }
+
+    @Test
+    void isExceptionThrownWhenChatCannotBeAddedToMongoDB() {
+        when(chatRepository.save(any(Chat.class))).
+                thenThrow(new ResponseStatusException(HttpStatus.CONFLICT));
+
+        assertThrows(ResponseStatusException.class, () ->
+                chatService.updateChat(message)
+        );
+    }
+
 }
