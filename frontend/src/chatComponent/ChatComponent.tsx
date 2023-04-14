@@ -15,6 +15,9 @@ export default function ChatComponent() {
         onOpen: () => {
         },
         shouldReconnect: () => true,
+        onMessage: (event: MessageEvent) => {
+            const messageData = JSON.parse(event.data)
+        }
     });
 
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {

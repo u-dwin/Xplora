@@ -1,6 +1,7 @@
 package com.danielwindel.chats;
 
 import com.danielwindel.util.datetime.DateTime;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.socket.CloseStatus;
@@ -11,7 +12,9 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 import java.net.URI;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @AllArgsConstructor
 @Service
@@ -50,10 +53,18 @@ public class WebSocketChatHandler extends TextWebSocketHandler {
 
         chatService.updateChat(message);
 
+        Map<String, String> messageData = new HashMap<>();
+
+        messageData.put("time", timeNow.toString());
+        messageData.put("text", textMessage.getPayload());
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        String messageJson = objectMapper.writeValueAsString(messageData);
+
         for (WebSocketSession openSession : openSessions) {
             String openSessionId = (String) openSession.getAttributes().get("id");
             if (openSessionId.equals(chatId)) {
-                openSession.sendMessage(textMessage);
+                openSession.sendMessage(new TextMessage(messageJson));
             }
         }
     }
