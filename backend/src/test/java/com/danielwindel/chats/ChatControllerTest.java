@@ -13,6 +13,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import java.util.ArrayList;
+
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 
 @SpringBootTest
@@ -30,6 +32,18 @@ class ChatControllerTest {
     ObjectMapper mapper = new ObjectMapper();
     ChatDTO testChatDTO = new ChatDTO();
 
+    String testUserId1 = "1";
+
+    String testUserId2 = "2";
+
+    String[] participants = new String[]{testUserId1, testUserId2};
+
+    ArrayList<Message> messages = new ArrayList<>();
+
+    Chat testChat = new Chat("3", messages, participants);
+
+    Chat testChatWithMessage = new Chat("4", messages, participants);
+
     @Test
     @DirtiesContext
     void chatCreateReturnsCreatedChat() throws Exception {
@@ -43,5 +57,37 @@ class ChatControllerTest {
                         status()
                         .isOk())
                 .andExpect(content().json(testChatDTOJson));
+    }
+
+    @Test
+    @DirtiesContext
+    void isGetChatsByParticipantIdReturningCorrectChats() throws Exception {
+        String testChatListJson = """
+                            [
+                         {
+                    "id": "3",
+                    "messages": [],
+                    "participants": ["1", "2"]
+                  },
+                  {
+                    "id": "4",
+                    "messages":[],
+                    "participants": ["1", "2"]
+                  }
+                ]
+                            """;
+
+        chatRepository.save(testChatWithMessage);
+
+        chatRepository.save(testChat);
+
+
+        mockMvc.perform(MockMvcRequestBuilders
+                        .post("/api/chats/get-by-participant-id")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("1"))
+                .andExpect(MockMvcResultMatchers.status()
+                        .isOk())
+                .andExpect(content().json(testChatListJson));
     }
 }

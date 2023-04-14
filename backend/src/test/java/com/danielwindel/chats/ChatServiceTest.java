@@ -69,7 +69,7 @@ class ChatServiceTest {
     }
 
     @Test
-    void isGetAllExpertsGettingAllExperts() {
+    void isGetChatsByParticipantsIdReturningCorrectChats() {
         when(chatRepository.findAllByParticipants("1"))
                 .thenReturn(testChatList);
 
