@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -38,6 +39,10 @@ class ChatServiceTest {
 
     ChatDTO testChatDTO = new ChatDTO(participants);
 
+    List<Chat> testChatList = new ArrayList<>() {{
+        add(testChatWithMessage);
+    }};
+
     @Test
     void IsAddChatReturningAddedChat() {
 
@@ -61,5 +66,15 @@ class ChatServiceTest {
         Chat actual = chatService.updateChat(message);
 
         assertEquals(testChatWithMessage, actual);
+    }
+
+    @Test
+    void isGetAllExpertsGettingAllExperts() {
+        when(chatRepository.findAllByParticipants("1"))
+                .thenReturn(testChatList);
+
+        List<Chat> actual = chatService.getChatsWithParticipantId("1");
+
+        assertEquals(testChatList, actual);
     }
 }
