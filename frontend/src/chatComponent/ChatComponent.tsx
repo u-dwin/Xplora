@@ -4,6 +4,7 @@ import {useParams} from "react-router-dom";
 import Cookies from "js-cookie";
 import {ChangeEvent, useState} from "react";
 import {MessageType} from "./MessageType";
+import MessageComponent from "./MessageComponent";
 
 export default function ChatComponent() {
     const {id} = useParams()
@@ -39,6 +40,7 @@ export default function ChatComponent() {
     };
 
 
+
     return (
         <Box sx={{
             display: "flex",
@@ -64,6 +66,12 @@ export default function ChatComponent() {
                     onChange={handleInputChange}
                     onKeyDown={handleKeyDown}
                 />
+
+                {receivedInstantMessages.map((message) => (
+                        <MessageComponent text={message.text} userId={message.userId} time={message.time}/>
+                    )
+                )}
+
             </Box>
         </Box>
     )
