@@ -3,11 +3,13 @@ import useWebSocket from "react-use-websocket";
 import {useParams} from "react-router-dom";
 import Cookies from "js-cookie";
 import {ChangeEvent, useState} from "react";
+import {MessageType} from "./MessageType";
 
 export default function ChatComponent() {
     const {id} = useParams()
     const userId: string | undefined = Cookies.get("userId") || "unknown"
-    const [message, setMessage] = useState("");
+    const [inputMessage, setInputMessage] = useState("");
+    const [receivedInstantMessages, setReceivedInstantMessages] = useState<MessageType[]>([])
 
     const {
         sendMessage
@@ -17,17 +19,22 @@ export default function ChatComponent() {
         shouldReconnect: () => true,
         onMessage: (event: MessageEvent) => {
             const messageData = JSON.parse(event.data)
+            const time = messageData.time.substring(11, 16)
+            const text = messageData.text
+            const userId = messageData.id
+            const newMessage: MessageType = {time, text, userId};
+            setReceivedInstantMessages((prevMessages) => [...prevMessages, newMessage])
         }
     });
 
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setMessage(event.target.value);
+        setInputMessage(event.target.value);
     };
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
             event.preventDefault();
-            sendMessage(message);
-            setMessage('');
+            sendMessage(inputMessage);
+            setInputMessage('');
         }
     };
 
@@ -53,7 +60,7 @@ export default function ChatComponent() {
                     size="small"
                     placeholder="Enter a message..."
                     id="outlined-size-normal"
-                    value={message}
+                    value={inputMessage}
                     onChange={handleInputChange}
                     onKeyDown={handleKeyDown}
                 />
