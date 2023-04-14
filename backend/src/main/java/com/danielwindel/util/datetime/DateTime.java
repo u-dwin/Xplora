@@ -1,4 +1,4 @@
-package com.danielwindel.util.dateTime;
+package com.danielwindel.util.datetime;
 
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,6 @@
 package com.danielwindel.chats;
 
-import com.danielwindel.util.dateTime.DateTime;
+import com.danielwindel.util.datetime.DateTime;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.web.socket.TextMessage;
