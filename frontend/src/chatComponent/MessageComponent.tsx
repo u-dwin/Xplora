@@ -14,7 +14,7 @@ export default function MessageComponent(props: MessageType) {
             alignItems: "center"
         }}>
             <Box>
-                {props.text}" " {props.time}
+                {props.text} {props.time}
             </Box>
         </Box>
     )
