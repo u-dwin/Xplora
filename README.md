@@ -57,3 +57,9 @@ To run this project, you will need to add the following environment variables to
 3. CSS frameworks such as MUI make your (developers) life easier. 
 
 4. Do not think too complicated, sometimes solutions are simple. 
+
+5. Rubber ducking is super useful.
+
+6. Take breaks.
+
+7. If you have issues with positioning things put borders around elements to see where they are. 
