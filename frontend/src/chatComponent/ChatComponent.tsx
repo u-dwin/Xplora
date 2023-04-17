@@ -73,9 +73,6 @@ export default function ChatComponent() {
                             sx={{
                                 display: "flex",
                                 flexDirection: "column",
-                                border: "2px",
-                                borderColor: "black",
-                                borderStyle: "solid",
                             }}
                             key={`${message.text}-${message.time}-${message.userId}`}
                         >
@@ -83,6 +80,11 @@ export default function ChatComponent() {
                                 <Box
                                     sx={{
                                         alignSelf: "flex-end",
+                                        padding: "5px",
+                                        margin: "5px",
+                                        borderStyle: "solid",
+                                        borderColor: "#18746c",
+                                        borderRadius: "10px"
                                     }}
                                 >
                                     <MessageComponent
@@ -95,6 +97,11 @@ export default function ChatComponent() {
                                 <Box
                                     sx={{
                                         alignSelf: "flex-start",
+                                        padding: "5px",
+                                        margin: "5px",
+                                        borderStyle: "solid",
+                                        borderColor: "#31b585",
+                                        borderRadius: "10px"
                                     }}
                                 >
                                     <MessageComponent
@@ -114,6 +121,8 @@ export default function ChatComponent() {
                         justifyContent: "center",
                         flexDirection: "row",
                         alignItems: "center",
+                        position: "fixed",
+                        bottom: 0
                     }}>
 
                     <Box sx={{width: "5px"}}/>
@@ -127,7 +136,7 @@ export default function ChatComponent() {
                         onChange={handleInputChange}
                         onKeyDown={handleKeyDown}
                     />
-                    <SendIcon sx={{width: "25px", height: "25px"}}/>
+                    <SendIcon sx={{width: "25px", height: "25px", color: "#18746c"}}/>
                 </Box>
                 <Box sx={{width: "5px"}}/>
             </Box>
