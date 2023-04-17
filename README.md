@@ -32,6 +32,7 @@ To run this project, you will need to add the following environment variables to
 
 `MONGODB_URL` --> URL of your local MongoDB
 
+`CLOUDINARY_URL` --> Cloudinary URL containing your key
 
 ## Features
 
