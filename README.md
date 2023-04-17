@@ -37,9 +37,9 @@ To run this project, you will need to add the following environment variables to
 
 - Registration/Sign Up
 - Profile edit 
-- Search (planned)
-- Profile view (planned)
-- Chat (planned)
+- Search 
+- Profile view (in development)
+- Chat (in development)
 - Login (planned)
 - Delete Account (planned)
 - Many more as the project develops
