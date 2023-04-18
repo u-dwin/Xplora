@@ -46,7 +46,15 @@ export default function ChatComponent() {
         setInputMessage(event.target.value);
     };
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-        if (event.key === 'Enter') {
+        if (event.key === 'Enter' && inputMessage.length > 0) {
+            event.preventDefault();
+            sendMessage(inputMessage);
+            setInputMessage('');
+        }
+    };
+
+    const handleSendButtonClick = (event: React.MouseEvent<HTMLInputElement>) => {
+        if (inputMessage.length > 0) {
             event.preventDefault();
             sendMessage(inputMessage);
             setInputMessage('');
@@ -141,9 +149,6 @@ export default function ChatComponent() {
                     columnGap="1rem"
                     p={1}
                     sx={{
-                        border: "2px",
-                        borderStyle: "solid",
-                        borderColour: "black",
                         overflow: "hidden"
                     }}
                 >
@@ -157,7 +162,9 @@ export default function ChatComponent() {
                         onChange={handleInputChange}
                         onKeyDown={handleKeyDown}
                     />
-                    <SendIcon sx={{width: "25px", height: "25px", color: "#18746c"}}/>
+                    <Box onClick={handleSendButtonClick}>
+                        <SendIcon sx={{width: "25px", height: "25px", color: "#18746c"}}/>
+                    </Box>
                 </Box>
             </Box>
         </Box>
