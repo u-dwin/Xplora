@@ -6,6 +6,7 @@ import {ChangeEvent, useState} from "react";
 import {MessageType} from "./MessageType";
 import MessageComponent from "./MessageComponent";
 import SendIcon from '@mui/icons-material/Send';
+import Avatar from "@mui/material/Avatar";
 
 
 export default function ChatComponent() {
@@ -42,38 +43,55 @@ export default function ChatComponent() {
     };
 
     return (
-        <Box sx={{
-            display: "flex",
-            flexDirection: "column",
-            flexWrap: "wrap",
-            rowGap: "5px",
-            width: "100%",
-            alignItems: "center",
-            alignContent: "center",
-            justifyContent: "center",
-            justifyItems: "center",
-            height: "100%"
-        }}>
-            <Box sx={{
+        <Box
+            sx={{
                 display: "flex",
+                width: "100%",
                 flexDirection: "column",
-                flexWrap: "wrap",
-                justifyContent: "bottom",
-                justifyItems: "bottom",
-                alignItems: "bottom",
-                alignContent: "bottom",
-                width: "35ch",
-                height: "100%"
+                alignItems: "center"
             }}>
-                <Box sx={{
-                    flexGrow: 1,
-                }}>
+            <Box
+                sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    height: "42rem",
+                    width: "40ch",
+                    border: "2px",
+                    borderStyle: "solid",
+                    borderColour: "black",
+                }}
+            >
+                <Box
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                    padding="0.6rem"
+                    columnGap="0.6rem"
+                    sx={{
+                        border: "1px",
+                        borderColour: "yellow",
+                        borderStyle: "solid"
+                    }}
+                >
+                    <Avatar/>
+                    <Box>Username</Box>
+                </Box>
+
+                <Box
+                    flex={1}
+                    overflow="auto"
+                    padding="1rem"
+                    alignItems=""
+                    sx={{
+                        border: "2px",
+                        borderStyle: "solid",
+                        borderColour: "black"
+                    }}
+                >
                     {receivedInstantMessages.map((message) => (
                         <Box
-                            sx={{
-                                display: "flex",
-                                flexDirection: "column",
-                            }}
+                            display="flex"
+                            flexDirection="column"
                             key={`${message.text}-${message.time}-${message.userId}`}
                         >
                             {message.userId === userId ? (
@@ -116,16 +134,10 @@ export default function ChatComponent() {
                 </Box>
 
                 <Box
-                    sx={{
-                        display: "flex",
-                        justifyContent: "center",
-                        flexDirection: "row",
-                        alignItems: "center",
-                        position: "fixed",
-                        bottom: 0
-                    }}>
-
-                    <Box sx={{width: "5px"}}/>
+                    display="flex"
+                    alignItems="center"
+                    p={1}
+                >
 
                     <TextField
                         sx={{width: "30ch"}}
@@ -138,8 +150,112 @@ export default function ChatComponent() {
                     />
                     <SendIcon sx={{width: "25px", height: "25px", color: "#18746c"}}/>
                 </Box>
-                <Box sx={{width: "5px"}}/>
             </Box>
         </Box>
     )
 }
+
+
+/* <Box sx={{
+     display: "flex",
+     flexDirection: "row",
+     flexWrap: "wrap",
+     rowGap: "5px",
+     width: "100%",
+     alignItems: "bottom",
+     alignContent: "bottom",
+     justifyContent: "bottom",
+     justifyItems: "bottom",
+     height: "650px",
+     border: "2px",
+     borderStyle: "solid",
+     borderColor: "red"
+ }}>
+     <Box sx={{
+         display: "flex",
+         flexDirection: "column",
+         flexWrap: "wrap",
+         justifyContent: "top",
+         justifyItems: "top",
+         alignItems: "top",
+         alignContent: "top",
+         width: "35ch",
+         flexGrow: 1,
+         overflowY: "scroll",
+         flexShrink: 0
+     }}>
+         <Box sx={{
+             flexGrow: 1
+         }}>
+             {receivedInstantMessages.map((message) => (
+                 <Box
+                     sx={{
+                         display: "flex",
+                         flexDirection: "column",
+                     }}
+                     key={`${message.text}-${message.time}-${message.userId}`}
+                 >
+                     {message.userId === userId ? (
+                         <Box
+                             sx={{
+                                 alignSelf: "flex-end",
+                                 padding: "5px",
+                                 margin: "5px",
+                                 borderStyle: "solid",
+                                 borderColor: "#18746c",
+                                 borderRadius: "10px"
+                             }}
+                         >
+                             <MessageComponent
+                                 text={message.text}
+                                 userId={message.userId}
+                                 time={message.time}
+                             />
+                         </Box>
+                     ) : (
+                         <Box
+                             sx={{
+                                 alignSelf: "flex-start",
+                                 padding: "5px",
+                                 margin: "5px",
+                                 borderStyle: "solid",
+                                 borderColor: "#31b585",
+                                 borderRadius: "10px"
+                             }}
+                         >
+                             <MessageComponent
+                                 text={message.text}
+                                 userId={message.userId}
+                                 time={message.time}
+                             />
+                         </Box>
+                     )}
+                 </Box>
+             ))}
+             <Box sx={{flexGrow: 1}}/>
+         </Box>
+         <Box sx={{width: "5px"}}/>
+     </Box>
+     <Box
+         sx={{
+             display: "flex",
+             justifyContent: "center",
+             flexDirection: "row",
+             position: "sticky",
+             bottom: "0"
+         }}>
+
+         <Box sx={{width: "5px"}}/>
+
+         <TextField
+             sx={{width: "30ch"}}
+             size="small"
+             placeholder="Enter a message..."
+             id="outlined-size-normal"
+             value={inputMessage}
+             onChange={handleInputChange}
+             onKeyDown={handleKeyDown}
+         />
+         <SendIcon sx={{width: "25px", height: "25px", color: "#18746c"}}/>
+     </Box>
+ </Box>*/
