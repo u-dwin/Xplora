@@ -165,6 +165,7 @@ export default function ChatComponent() {
                         placeholder="Enter a message..."
                         id="outlined-size-normal"
                         value={inputMessage}
+                        autoComplete="off"
                         onChange={handleInputChange}
                         onKeyDown={handleKeyDown}
                     />
