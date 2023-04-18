@@ -2,6 +2,10 @@
 # Xplora
 An app that connects travelers and travel experts to explore remote travel destinations. 
 
+![xplora_gif](https://user-images.githubusercontent.com/122820707/232806586-8c91fa33-2db1-4e0f-ab87-f9259f9582de.gif)
+
+## Deployed Version
+xplora.fly.dev -> Choose traveler
 
 ## Run Locally
 
@@ -32,14 +36,16 @@ To run this project, you will need to add the following environment variables to
 
 `MONGODB_URL` --> URL of your local MongoDB
 
+`CLOUDINARY_URL` --> Cloudinary URL containing your key
 
 ## Features
 
 - Registration/Sign Up
 - Profile edit 
-- Search 
+- Expert Search 
 - Profile view 
-- Chat (planned)
+- Live Chat 
+- Persistent chat (retrieving history from backend) (in development)
 - Login (planned)
 - Delete Account (planned)
 - Many more as the project develops
@@ -53,3 +59,10 @@ To run this project, you will need to add the following environment variables to
 3. CSS frameworks such as MUI make your (developers) life easier. 
 
 4. Do not think too complicated, sometimes solutions are simple. 
+
+5. Rubber ducking is super useful.
+
+6. Take breaks.
+
+7. If you have issues with positioning things put borders around elements to see where they are. 
+
