@@ -5,6 +5,8 @@ An app that connects travelers and travel experts to explore remote travel desti
 ## Deployed Version
 xplora.fly.dev -> Choose traveler
 
+## Features 
+![xplora_gif](https://user-images.githubusercontent.com/122820707/232805810-04f01354-e059-4b27-a394-729efa10ef82.gif)
 
 ## Run Locally
 
