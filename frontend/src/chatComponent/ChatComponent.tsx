@@ -110,7 +110,9 @@ export default function ChatComponent() {
                                         margin: "5px",
                                         borderStyle: "solid",
                                         borderColor: "#18746c",
-                                        borderRadius: "10px"
+                                        borderRadius: "10px",
+                                        wordWrap: "break-word",
+                                        maxWidth: "25ch"
                                     }}
                                 >
                                     <MessageComponent
@@ -127,7 +129,9 @@ export default function ChatComponent() {
                                         margin: "5px",
                                         borderStyle: "solid",
                                         borderColor: "#31b585",
-                                        borderRadius: "10px"
+                                        borderRadius: "10px",
+                                        wordWrap: "break-word",
+                                        maxWidth: "25ch"
                                     }}
                                 >
                                     <MessageComponent

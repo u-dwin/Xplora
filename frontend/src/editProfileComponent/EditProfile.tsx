@@ -30,7 +30,7 @@ export default function EditProfile() {
             alignItems: "center",
             rowGap: "5px"
         }}>
-            <Box sx={{height: "50px"}}></Box>
+            <Box sx={{height: "30px"}}></Box>
 
             <Box
                 component="form"
@@ -111,7 +111,7 @@ export default function EditProfile() {
 
                 <Typography>{notAllFieldsFilledError}</Typography>
 
-                <Box sx={{height: "5px"}}></Box>
+                <Box sx={{height: "20px"}}></Box>
 
                 <Button type="submit" variant="outlined" color="inherit" size="medium">
                     Update Profile
