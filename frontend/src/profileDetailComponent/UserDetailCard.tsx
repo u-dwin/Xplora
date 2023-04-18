@@ -18,7 +18,7 @@ export default function UserDetailCard() {
             "participants": [travelerId, expertId]
         }).then((response) => {
             const id = response.data.id
-            navigate(`/chat/${id}`)
+            navigate(`/chat/${id}`, {state: {user}})
         })
             .catch((error) => console.error(error))
     }
