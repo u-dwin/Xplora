@@ -2,12 +2,10 @@
 # Xplora
 An app that connects travelers and travel experts to explore remote travel destinations. 
 
-## Deployed Version
-xplora.fly.dev -> Choose traveler
-
-## Features 
 ![xplora_gif](https://user-images.githubusercontent.com/122820707/232806586-8c91fa33-2db1-4e0f-ab87-f9259f9582de.gif)
 
+## Deployed Version
+xplora.fly.dev -> Choose traveler
 
 ## Run Locally
 
@@ -66,3 +64,4 @@ To run this project, you will need to add the following environment variables to
 6. Take breaks.
 
 7. If you have issues with positioning things put borders around elements to see where they are. 
+
