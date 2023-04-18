@@ -2,7 +2,7 @@ import {Box, TextField} from "@mui/material";
 import useWebSocket from "react-use-websocket";
 import {useParams} from "react-router-dom";
 import Cookies from "js-cookie";
-import {ChangeEvent, useState} from "react";
+import {ChangeEvent, useEffect, useRef, useState} from "react";
 import {MessageType} from "./MessageType";
 import MessageComponent from "./MessageComponent";
 import SendIcon from '@mui/icons-material/Send';
@@ -14,6 +14,15 @@ export default function ChatComponent() {
     const userId: string | undefined = Cookies.get("userId") || "unknown"
     const [inputMessage, setInputMessage] = useState("");
     const [receivedInstantMessages, setReceivedInstantMessages] = useState<MessageType[]>([])
+    const messagesContainerRef = useRef<HTMLElement>(null);
+
+    useEffect(() => {
+        const messagesContainer = messagesContainerRef.current;
+        if (messagesContainer) {
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+    }, [receivedInstantMessages])
+
 
     const {
         sendMessage
@@ -56,9 +65,6 @@ export default function ChatComponent() {
                     flexDirection: "column",
                     height: "42rem",
                     width: "40ch",
-                    border: "2px",
-                    borderStyle: "solid",
-                    borderColour: "black",
                 }}
             >
                 <Box
@@ -67,26 +73,16 @@ export default function ChatComponent() {
                     justifyContent="center"
                     padding="0.6rem"
                     columnGap="0.6rem"
-                    sx={{
-                        border: "1px",
-                        borderColour: "yellow",
-                        borderStyle: "solid"
-                    }}
                 >
                     <Avatar/>
                     <Box>Username</Box>
                 </Box>
 
                 <Box
+                    ref={messagesContainerRef}
                     flex={1}
                     overflow="auto"
                     padding="1rem"
-                    alignItems=""
-                    sx={{
-                        border: "2px",
-                        borderStyle: "solid",
-                        borderColour: "black"
-                    }}
                 >
                     {receivedInstantMessages.map((message) => (
                         <Box
@@ -135,8 +131,17 @@ export default function ChatComponent() {
 
                 <Box
                     display="flex"
+                    flexDirection="row"
+                    justifyItems="center"
                     alignItems="center"
+                    columnGap="1rem"
                     p={1}
+                    sx={{
+                        border: "2px",
+                        borderStyle: "solid",
+                        borderColour: "black",
+                        overflow: "hidden"
+                    }}
                 >
 
                     <TextField
