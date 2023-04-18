@@ -117,6 +117,7 @@ export default function ChatComponent() {
                                     }}
                                 >
                                     <MessageComponent
+                                        key={`${message.text}-${message.time}-${message.userId}`}
                                         text={message.text}
                                         userId={message.userId}
                                         time={message.time}
@@ -136,6 +137,7 @@ export default function ChatComponent() {
                                     }}
                                 >
                                     <MessageComponent
+                                        key={`${message.text}-${message.time}-${message.userId}`}
                                         text={message.text}
                                         userId={message.userId}
                                         time={message.time}
