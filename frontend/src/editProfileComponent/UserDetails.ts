@@ -4,5 +4,6 @@ export type UserDetails = {
     firstName: string,
     lastName: string,
     places: string[],
-    activities: string[]
+    activities: string[],
+    userId: string
 }

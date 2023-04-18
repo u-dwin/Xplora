@@ -19,13 +19,21 @@
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 		<sonar.coverage.exclusions>**/StaticFilesConfig.java</sonar.coverage.exclusions>
 		<sonar.coverage.exclusions>**/GoogleCloudApiConfig.java</sonar.coverage.exclusions>
+		<sonar.coverage.exclusions>**/CloudinaryConfig.java</sonar.coverage.exclusions>
+		<sonar.coverage.exclusions>**/WebSocketConfig.java</sonar.coverage.exclusions>
 		<sonar.test.exclusions>**/StaticFilesConfig.java</sonar.test.exclusions>
 		<sonar.test.exclusions>**/GoogleCloudApiConfig.java</sonar.test.exclusions>
+		<sonar.test.exclusions>**/CloudinaryConfig.java</sonar.test.exclusions>
+		<sonar.test.exclusions>**/WebSocketConfig.java</sonar.test.exclusions>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-websocket</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>de.flapdoodle.embed</groupId>

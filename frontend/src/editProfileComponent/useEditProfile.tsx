@@ -3,6 +3,7 @@ import {ChangeEvent, useEffect, useRef, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import {UserDetails} from "./UserDetails";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 export default function useEditProfile() {
     const [notAllFieldsFilledError, setNotAllFieldsFilledError] = useState<string | boolean>(false)
@@ -18,6 +19,7 @@ export default function useEditProfile() {
         lastName: "",
         places: [],
         activities: [],
+        userId: ""
     })
 
     useEffect(() => {
@@ -99,7 +101,10 @@ export default function useEditProfile() {
                 activities: inputFields.activities
             })
                 .then(() => {
-                    navigate(`/update-profile-success`)
+                    if (userId) {
+                        Cookies.set('userId', userId);
+                    }
+                    navigate(`/home`)
                 })
         }
     }

@@ -1,5 +1,6 @@
 package com.danielwindel.users;
 
+import com.danielwindel.util.ids.IdService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -16,15 +17,15 @@ public class UserService {
     private final UserRepository userRepository;
 
     private final UserDetailsRepository userDetailsRepository;
-    private final UserIdService userIdService;
+    private final IdService idService;
 
     public User addUser(UserDTO userDTO) {
         User user = new User(userDTO);
         UserDetails userDetails = new UserDetails();
 
-        user.setUserId(userIdService.generateId());
+        user.setUserId(idService.generateId());
 
-        userDetails.setUserID(user.userId);
+        userDetails.setUserId(user.userId);
 
         userDetails.setType(userDTO.userType);
 
@@ -52,7 +53,7 @@ public class UserService {
 
         UserDetails userDetails = new UserDetails(userDetailsDTO);
         Optional<UserDetails> oldUserDetails = userDetailsRepository.findById(id);
-        userDetails.setUserID(id);
+        userDetails.setUserId(id);
 
         try {
             if (oldUserDetails.isEmpty()) {

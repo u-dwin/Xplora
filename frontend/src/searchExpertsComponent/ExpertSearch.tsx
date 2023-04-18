@@ -28,12 +28,12 @@ export default function ExpertSearch() {
             );
         })
         .map((expert: UserDetails) => {
-            const key = `${expert.firstName}-${expert.lastName}-${expert.description}-${expert.places}-${expert.activities}`;
+            const key = `${expert.firstName}-${expert.lastName}-${expert.description}-${expert.places}-${expert.activities}-${expert.userId}`;
             return (
                 <ExpertCard key={key} picture={expert.picture} description={expert.description}
                             firstName={expert.firstName}
                             lastName={expert.lastName} places={expert.places}
-                            activities={expert.activities}></ExpertCard>
+                            activities={expert.activities} userId={expert.userId}/>
             )
         })
 
@@ -60,7 +60,7 @@ export default function ExpertSearch() {
                 sx={{
                     display: "flex",
                     justifyContent: "center",
-                    flexDirection: "row",
+                    flexDirection: "column",
                     columnGap: "5px",
                     justifyItems: "center",
                     alignItems: "center",
@@ -76,10 +76,8 @@ export default function ExpertSearch() {
                            value={searchQuery}
                            onChange={handleSearchChange}
                 />
-
+                {expertCards}
             </Box>
-
-            {expertCards}
         </Box>
 
     )

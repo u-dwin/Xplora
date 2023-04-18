@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 public class UserDetails {
     @Id
-    private String userID;
+    private String userId;
 
     private String type;
     private String picture;
@@ -32,6 +32,4 @@ public class UserDetails {
         this.places = userDetailsDTO.getPlaces();
         this.activities = userDetailsDTO.getActivities();
     }
-
-
 }
