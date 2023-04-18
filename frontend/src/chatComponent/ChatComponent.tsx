@@ -67,7 +67,8 @@ export default function ChatComponent() {
                 display: "flex",
                 width: "100%",
                 flexDirection: "column",
-                alignItems: "center"
+                alignItems: "center",
+                justifyItems: "center",
             }}>
             <Box
                 sx={{
@@ -148,12 +149,13 @@ export default function ChatComponent() {
                 <Box
                     display="flex"
                     flexDirection="row"
-                    justifyItems="center"
+                    justifyContent="center"
                     alignItems="center"
+                    alignContent="center"
                     columnGap="1rem"
                     p={1}
                     sx={{
-                        overflow: "hidden"
+                        overflow: "hidden",
                     }}
                 >
 
