@@ -22,7 +22,7 @@ export default function ChatComponent() {
     if (window.location.hostname === "localhost") {
         webSocketUrl = `ws://localhost:8080/api/ws/chat/${id}?userId=${userId}`;
     } else {
-        webSocketUrl = `ws://xplora.fly.dev/api/ws/chat/${id}?userId=${userId}`;
+        webSocketUrl = `wss://xplora.fly.dev/api/ws/chat/${id}?userId=${userId}`;
     }
 
     useEffect(() => {
