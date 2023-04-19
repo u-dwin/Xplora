@@ -74,10 +74,13 @@ export default function ChatComponent() {
                 sx={{
                     display: "flex",
                     flexDirection: "column",
-                    height: "42rem",
+                    height: "47rem",
                     width: "40ch",
                 }}
             >
+                <Box sx={{
+                    height: "15px",
+                }}/>
                 <Box
                     display="flex"
                     alignItems="center"
