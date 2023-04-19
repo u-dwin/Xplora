@@ -16,7 +16,7 @@ public class WebSocketConfig implements WebSocketConfigurer {
         this.webSocketChatHandler = webSocketChatHandler;
     }
 
-    private boolean isNotDeployed() {
+    private boolean isDeployed() {
         return System.getenv("NOT_DEPLOYED") == null;
     }
 
@@ -24,7 +24,7 @@ public class WebSocketConfig implements WebSocketConfigurer {
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
         String webSocketEndpointUrl;
 
-        if (isNotDeployed()) {
+        if (isDeployed()) {
             webSocketEndpointUrl = "wss://xplora.fly.dev/api/ws/chat/{id}";
         } else
             webSocketEndpointUrl = "api/ws/chat/{id}";
