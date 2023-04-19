@@ -17,6 +17,13 @@ export default function ChatComponent() {
     const [inputMessage, setInputMessage] = useState("");
     const [receivedInstantMessages, setReceivedInstantMessages] = useState<MessageType[]>([])
     const messagesContainerRef = useRef<HTMLElement>(null);
+    let webSocketUrl;
+
+    if (window.location.hostname === "localhost") {
+        webSocketUrl = `ws://localhost:8080/api/ws/chat/${id}?userId=${userId}`;
+    } else {
+        webSocketUrl = `ws://xplora.fly.dev/api/ws/chat/${id}?userId=${userId}`;
+    }
 
     useEffect(() => {
         const messagesContainer = messagesContainerRef.current;
@@ -28,7 +35,7 @@ export default function ChatComponent() {
 
     const {
         sendMessage
-    } = useWebSocket(`/api/ws/chat/${id}?userId=${userId}`, {
+    } = useWebSocket(webSocketUrl, {
         onOpen: () => {
         },
         shouldReconnect: () => true,
@@ -74,7 +81,7 @@ export default function ChatComponent() {
                 sx={{
                     display: "flex",
                     flexDirection: "column",
-                    height: "47rem",
+                    height: "55rem",
                     width: "40ch",
                 }}
             >
