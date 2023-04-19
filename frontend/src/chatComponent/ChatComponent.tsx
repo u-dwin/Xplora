@@ -28,7 +28,7 @@ export default function ChatComponent() {
 
     const {
         sendMessage
-    } = useWebSocket(`ws://localhost:8080/api/ws/chat/${id}?userId=${userId}`, {
+    } = useWebSocket(`/api/ws/chat/${id}?userId=${userId}`, {
         onOpen: () => {
         },
         shouldReconnect: () => true,
