@@ -16,21 +16,10 @@ public class WebSocketConfig implements WebSocketConfigurer {
         this.webSocketChatHandler = webSocketChatHandler;
     }
 
-    private boolean isDeployed() {
-        return System.getenv("NOT_DEPLOYED") == null;
-    }
-
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        String webSocketEndpointUrl;
-
-        if (isDeployed()) {
-            webSocketEndpointUrl = "wss://xplora.fly.dev/api/ws/chat/{id}";
-        } else
-            webSocketEndpointUrl = "api/ws/chat/{id}";
-
         registry
-                .addHandler(webSocketChatHandler, webSocketEndpointUrl)
+                .addHandler(webSocketChatHandler, "/api/ws/chat/{id}")
                 .setAllowedOrigins("*");
     }
 
