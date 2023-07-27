@@ -3,6 +3,7 @@ package com.danielwindel.users;
 import com.danielwindel.util.ids.IdService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -14,6 +15,8 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class UserService {
+    private final PasswordEncoder passwordEncoder;
+
     private final UserRepository userRepository;
 
     private final UserProfileRepository userProfileRepository;
@@ -24,6 +27,8 @@ public class UserService {
         UserProfile userProfile = new UserProfile();
 
         user.setUserId(idService.generateId());
+
+        user.setUserPassword(passwordEncoder.encode(userDTO.userPassword));
 
         userProfile.setUserId(user.userId);
 
