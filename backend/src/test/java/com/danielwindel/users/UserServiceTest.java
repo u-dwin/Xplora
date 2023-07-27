@@ -21,8 +21,8 @@ class UserServiceTest {
 
     IdService idService = mock(IdService.class);
 
-    UserDetailsRepository userDetailsRepository = mock(UserDetailsRepository.class);
-    UserService userService = new UserService(userRepository, userDetailsRepository, idService);
+    UserProfileRepository userProfileRepository = mock(UserProfileRepository.class);
+    UserService userService = new UserService(userRepository, userProfileRepository, idService);
 
     UserDTO testUserDTO = new UserDTO("test_email_address", "test_password", "traveler");
 
@@ -33,13 +33,13 @@ class UserServiceTest {
     List<String> activities = List.of("testactivity1", "testactivity2");
 
     List<String> empty = List.of("");
-    UserDetailsDTO testUserDetailsDTO = new UserDetailsDTO("link_to_picture", "description", "firstname", "lastname", places, activities);
+    UserProfileDTO testUserProfileDTO = new UserProfileDTO("link_to_picture", "description", "firstname", "lastname", places, activities);
 
-    UserDetails testUserDetails = new UserDetails("1", "traveler", "link_to_picture", "description", "firstname", "lastname", places, activities);
+    UserProfile testUserProfile = new UserProfile("1", "traveler", "link_to_picture", "description", "firstname", "lastname", places, activities);
 
-    UserDetails testUserDetailsOptional = new UserDetails("1", "traveler", "", "", "", "", empty, empty);
+    UserProfile testUserProfileOptional = new UserProfile("1", "traveler", "", "", "", "", empty, empty);
 
-    List<UserDetails> testUserDetailsList = List.of(testUserDetails, testUserDetails);
+    List<UserProfile> testUserProfileList = List.of(testUserProfile, testUserProfile);
 
 
     @Test
@@ -68,40 +68,40 @@ class UserServiceTest {
 
     @Test
     void isEditUserDetailsSavingNewUserDetailsCorrectly() {
-        when(userDetailsRepository.findById("1")).thenReturn(Optional.of(testUserDetailsOptional));
+        when(userProfileRepository.findById("1")).thenReturn(Optional.of(testUserProfileOptional));
 
 
-        when(userDetailsRepository.save(testUserDetails)).
-                thenReturn(testUserDetails);
+        when(userProfileRepository.save(testUserProfile)).
+                thenReturn(testUserProfile);
 
 
-        UserDetails actual = userService.editUserDetails(testUserDetailsDTO, "1");
+        UserProfile actual = userService.editUserDetails(testUserProfileDTO, "1");
 
-        assertEquals(testUserDetails, actual);
+        assertEquals(testUserProfile, actual);
     }
 
     @Test
     void isEditUserDetailsThrowingNoSuchElementExceptionIfUserDoesNotExists() {
-        when(userDetailsRepository.findById("1")).
+        when(userProfileRepository.findById("1")).
                 thenReturn(Optional.empty());
 
         assertThrows(ResponseStatusException.class, () ->
-                userService.editUserDetails(testUserDetailsDTO, "1")
+                userService.editUserDetails(testUserProfileDTO, "1")
         );
     }
 
     @Test
     void isSingleUserDetailsReturningSingleUserDetail() {
-        when(userDetailsRepository.findById("1")).thenReturn(Optional.of(testUserDetails));
+        when(userProfileRepository.findById("1")).thenReturn(Optional.of(testUserProfile));
 
-        UserDetails actual = userService.getUserDetails("1");
+        UserProfile actual = userService.getUserDetails("1");
 
-        assertEquals(testUserDetails, actual);
+        assertEquals(testUserProfile, actual);
     }
 
     @Test
     void isSingleUserDetailsThrowingExceptionWhenNotFound() {
-        when(userDetailsRepository.findById("1")).
+        when(userProfileRepository.findById("1")).
                 thenReturn(Optional.empty());
 
         assertThrows(NoSuchElementException.class, () ->
@@ -111,12 +111,12 @@ class UserServiceTest {
 
     @Test
     void isGetAllExpertsGettingAllExperts() {
-        when(userDetailsRepository.findAllByType("expert"))
-                .thenReturn(testUserDetailsList);
+        when(userProfileRepository.findAllByType("expert"))
+                .thenReturn(testUserProfileList);
 
-        List<UserDetails> actual = userService.getAllExperts();
+        List<UserProfile> actual = userService.getAllExperts();
 
-        assertEquals(testUserDetailsList, actual);
+        assertEquals(testUserProfileList, actual);
     }
 }
 

@@ -25,7 +25,7 @@ class UserControllerTest {
     MockMvc mockMvc;
 
     @Autowired
-    private UserDetailsRepository userDetailsRepository;
+    private UserProfileRepository userProfileRepository;
 
     @MockBean
     GeoApiContext geoApiContext;
@@ -39,17 +39,17 @@ class UserControllerTest {
     List<String> activities = List.of("testactivity1", "testactivity2");
 
     List<String> empty = List.of("");
-    UserDetailsDTO testUserDetailsDTO = new UserDetailsDTO("link_to_picture", "description", "firstname", "lastname", places, activities);
+    UserProfileDTO testUserProfileDTO = new UserProfileDTO("link_to_picture", "description", "firstname", "lastname", places, activities);
 
-    UserDetails testUserDetails = new UserDetails("1", "traveler", "link_to_picture", "description", "firstname", "lastname", places, activities);
+    UserProfile testUserProfile = new UserProfile("1", "traveler", "link_to_picture", "description", "firstname", "lastname", places, activities);
 
-    UserDetails testUserDetailsEmpty = new UserDetails("1", "traveler", "", "", "", "", empty, empty);
+    UserProfile testUserProfileEmpty = new UserProfile("1", "traveler", "", "", "", "", empty, empty);
 
-    UserDetails testUserDetailsExpert = new UserDetails("1", "expert", "link_to_picture", "description", "firstname", "lastname", places, activities);
+    UserProfile testUserProfileExpert = new UserProfile("1", "expert", "link_to_picture", "description", "firstname", "lastname", places, activities);
 
-    UserDetails testUserDetailsExpert2 = new UserDetails("2", "expert", "link_to_picture", "description", "firstname", "lastname", places, activities);
+    UserProfile testUserProfileExpert2 = new UserProfile("2", "expert", "link_to_picture", "description", "firstname", "lastname", places, activities);
 
-    List<UserDetails> testUserDetailsList = List.of(testUserDetailsExpert, testUserDetailsExpert2);
+    List<UserProfile> testUserProfileList = List.of(testUserProfileExpert, testUserProfileExpert2);
 
     @Test
     @DirtiesContext
@@ -68,10 +68,10 @@ class UserControllerTest {
     @Test
     @DirtiesContext
     void editUserDetailsEndpointReturnsEditedUserDetails() throws Exception {
-        String testUserDetailDTOJson = mapper.writeValueAsString(testUserDetailsDTO);
-        String testUserDetailsJson = mapper.writeValueAsString(testUserDetails);
+        String testUserDetailDTOJson = mapper.writeValueAsString(testUserProfileDTO);
+        String testUserDetailsJson = mapper.writeValueAsString(testUserProfile);
 
-        userDetailsRepository.save(testUserDetailsEmpty);
+        userProfileRepository.save(testUserProfileEmpty);
 
         mockMvc.perform(MockMvcRequestBuilders
                         .put("/api/users/profile/1")
@@ -85,9 +85,9 @@ class UserControllerTest {
     @Test
     @DirtiesContext
     void getUserDetailsEndpointReturnsUser() throws Exception {
-        String testUserDetailsJson = mapper.writeValueAsString(testUserDetails);
+        String testUserDetailsJson = mapper.writeValueAsString(testUserProfile);
 
-        userDetailsRepository.save(testUserDetails);
+        userProfileRepository.save(testUserProfile);
 
         mockMvc.perform(MockMvcRequestBuilders
                         .get("/api/users/profile/1"))
@@ -100,11 +100,11 @@ class UserControllerTest {
     @DirtiesContext
     void isGetAllExpertsReturningAllExperts() throws Exception {
 
-        String testUserDetailsListJson = mapper.writeValueAsString(testUserDetailsList);
+        String testUserDetailsListJson = mapper.writeValueAsString(testUserProfileList);
 
-        userDetailsRepository.save(testUserDetailsExpert);
+        userProfileRepository.save(testUserProfileExpert);
 
-        userDetailsRepository.save(testUserDetailsExpert2);
+        userProfileRepository.save(testUserProfileExpert2);
 
 
         mockMvc.perform(MockMvcRequestBuilders

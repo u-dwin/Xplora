@@ -16,70 +16,70 @@ import java.util.Optional;
 public class UserService {
     private final UserRepository userRepository;
 
-    private final UserDetailsRepository userDetailsRepository;
+    private final UserProfileRepository userProfileRepository;
     private final IdService idService;
 
     public User addUser(UserDTO userDTO) {
         User user = new User(userDTO);
-        UserDetails userDetails = new UserDetails();
+        UserProfile userProfile = new UserProfile();
 
         user.setUserId(idService.generateId());
 
-        userDetails.setUserId(user.userId);
+        userProfile.setUserId(user.userId);
 
-        userDetails.setType(userDTO.userType);
+        userProfile.setType(userDTO.userType);
 
-        userDetails.setPicture("");
+        userProfile.setPicture("");
 
-        userDetails.setFirstName("");
+        userProfile.setFirstName("");
 
-        userDetails.setLastName("");
+        userProfile.setLastName("");
 
-        userDetails.setDescription("");
+        userProfile.setDescription("");
 
-        userDetails.setPlaces(new ArrayList<>());
+        userProfile.setPlaces(new ArrayList<>());
 
-        userDetails.setActivities(new ArrayList<>());
+        userProfile.setActivities(new ArrayList<>());
 
         try {
-            userDetailsRepository.save(userDetails);
+            userProfileRepository.save(userProfile);
             return userRepository.save(user);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.CONFLICT);
         }
     }
 
-    public UserDetails editUserDetails(UserDetailsDTO userDetailsDTO, String id) {
+    public UserProfile editUserDetails(UserProfileDTO userProfileDTO, String id) {
 
-        UserDetails userDetails = new UserDetails(userDetailsDTO);
-        Optional<UserDetails> oldUserDetails = userDetailsRepository.findById(id);
-        userDetails.setUserId(id);
+        UserProfile userProfile = new UserProfile(userProfileDTO);
+        Optional<UserProfile> oldUserDetails = userProfileRepository.findById(id);
+        userProfile.setUserId(id);
 
         try {
             if (oldUserDetails.isEmpty()) {
                 throw new NoSuchElementException();
             }
             String type = oldUserDetails.get().getType();
-            userDetails.setType(type);
-            return userDetailsRepository.save(userDetails);
+            userProfile.setType(type);
+            return userProfileRepository.save(userProfile);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.CONFLICT);
         }
     }
 
-    public UserDetails getUserDetails(String id) {
-        Optional<UserDetails> singleUserDetailsOptional = userDetailsRepository.findById(id);
+    public UserProfile getUserDetails(String id) {
+        Optional<UserProfile> singleUserDetailsOptional = userProfileRepository.findById(id);
 
         if (singleUserDetailsOptional.isEmpty()) {
             throw new NoSuchElementException();
         }
-        UserDetails singleUserDetails;
-        singleUserDetails = singleUserDetailsOptional.get();
-        return singleUserDetails;
+        UserProfile singleUserProfile;
+        singleUserProfile = singleUserDetailsOptional.get();
+        return singleUserProfile;
     }
 
-    public List<UserDetails> getAllExperts() {
-        return userDetailsRepository.findAllByType("expert");
+    public List<UserProfile> getAllExperts() {
+        return userProfileRepository.findAllByType("expert");
     }
 }
 

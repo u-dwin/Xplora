@@ -6,8 +6,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface UserDetailsRepository extends MongoRepository<UserDetails, String> {
-    List<UserDetails> findAllByType(String type);
+public interface UserProfileRepository extends MongoRepository<UserProfile, String> {
+    List<UserProfile> findAllByType(String type);
 
 }
 

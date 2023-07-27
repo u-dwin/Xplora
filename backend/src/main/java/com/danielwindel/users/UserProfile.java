@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @AllArgsConstructor
-public class UserDetails {
+public class UserProfile {
     @Id
     private String userId;
 
@@ -24,12 +24,12 @@ public class UserDetails {
     private List<String> places;
     private List<String> activities;
 
-    public UserDetails(UserDetailsDTO userDetailsDTO) {
-        this.picture = userDetailsDTO.getPicture();
-        this.description = userDetailsDTO.getDescription();
-        this.firstName = userDetailsDTO.getFirstName();
-        this.lastName = userDetailsDTO.getLastName();
-        this.places = userDetailsDTO.getPlaces();
-        this.activities = userDetailsDTO.getActivities();
+    public UserProfile(UserProfileDTO userProfileDTO) {
+        this.picture = userProfileDTO.getPicture();
+        this.description = userProfileDTO.getDescription();
+        this.firstName = userProfileDTO.getFirstName();
+        this.lastName = userProfileDTO.getLastName();
+        this.places = userProfileDTO.getPlaces();
+        this.activities = userProfileDTO.getActivities();
     }
 }

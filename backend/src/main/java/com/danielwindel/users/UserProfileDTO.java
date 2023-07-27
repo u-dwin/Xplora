@@ -9,7 +9,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class UserDetailsDTO {
+public class UserProfileDTO {
     private String picture;
     private String description;
     private String firstName;

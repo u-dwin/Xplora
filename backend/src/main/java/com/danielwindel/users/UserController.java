@@ -19,17 +19,17 @@ public class UserController {
 
     @PutMapping("/profile/{id}")
     @ResponseBody
-    public UserDetails editUserDetails(@PathVariable String id, @RequestBody UserDetailsDTO userDetailsDTO) {
-        return userService.editUserDetails(userDetailsDTO, id);
+    public UserProfile editUserDetails(@PathVariable String id, @RequestBody UserProfileDTO userProfileDTO) {
+        return userService.editUserDetails(userProfileDTO, id);
     }
 
     @GetMapping("/profile/{id}")
-    public UserDetails getUserDetails(@PathVariable String id) {
+    public UserProfile getUserDetails(@PathVariable String id) {
         return userService.getUserDetails(id);
     }
 
     @GetMapping("/experts")
-    public List<UserDetails> getAllExpertDetails() {
+    public List<UserProfile> getAllExpertDetails() {
         return userService.getAllExperts();
     }
 }
