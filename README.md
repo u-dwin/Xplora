@@ -34,7 +34,7 @@ To run this project, you will need to add the following environment variables to
 
 `GOOGLE_API_KEY` --> Your Google Cloud API Key
 
-`MONGODB_URL` --> URL of your local MongoDB
+`MONGO_URL` --> URL of your local MongoDB
 
 `CLOUDINARY_URL` --> Cloudinary URL containing your key
 
