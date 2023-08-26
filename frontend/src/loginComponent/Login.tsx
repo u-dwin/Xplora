@@ -1,19 +1,14 @@
 import {Box, Button, TextField, Typography} from "@mui/material";
-import useAddUser from "./useAddUser";
 import logo from "../logo.png";
+import useLogin from "./useLogin";
 
-export default function SignUp() {
+export default function Login() {
     const {
-        travelerChoiceClick,
-        expertChoiceClick,
-        registrationFormSubmit,
+        loginFormSubmit,
         handleEmailChange,
         handlePasswordChange,
-        inputFields,
-        addUser,
-        emailError,
-        passwordError
-    } = useAddUser();
+        inputFields
+    } = useLogin();
 
     return (
         <Box sx={{
@@ -25,22 +20,12 @@ export default function SignUp() {
             rowGap: "5px"
         }}>
             <Box> <img src={logo} alt="xplora_logo" width="200" height="133"/> </Box>
-            <Box sx={{height: "50px"}}></Box>
-            {addUser?.userType === "" ? (
-                <>
-                    <Typography variant={"h4"} justifyItems={"center"}>I am a...</Typography>
-                    <Box sx={{height: "50px"}}></Box>
-                    <Button variant="outlined" color="inherit" onClick={travelerChoiceClick}>
-                        Traveler
-                    </Button>
-                    <Button variant="outlined" color="inherit" onClick={expertChoiceClick}>
-                        Expert
-                    </Button>
-                </>
-            ) : (
+            <Typography sx={{fontSize: 16, fontWeight: 'bold'}}>
+                {"Login"}
+            </Typography>
                 <Box
                     component="form"
-                    onSubmit={registrationFormSubmit}
+                    onSubmit={loginFormSubmit}
                     sx={{
                         "& .MuiTextField-root": {
                             m: 1,
@@ -55,15 +40,13 @@ export default function SignUp() {
                     noValidate
                     autoComplete="off"
                 >
-                        <TextField
-                            size="small"
-                            label="email"
-                            id="emailTextfield"
-                            value={inputFields.email}
-                            onChange={handleEmailChange}
-                            error={Boolean(emailError)}
-                            helperText={emailError}
-                        />
+                    <TextField
+                        size="small"
+                        label="email"
+                        id="emailTextfield"
+                        value={inputFields.email}
+                        onChange={handleEmailChange}
+                    />
 
                     <TextField
                         size="small"
@@ -72,14 +55,11 @@ export default function SignUp() {
                         id="passwordTextfield"
                         value={inputFields.password}
                         onChange={handlePasswordChange}
-                        error={Boolean(passwordError)}
-                        helperText={passwordError}
                     />
                     <Button type="submit" variant="outlined" color="inherit" size="medium">
                         Sign Up
                     </Button>
                 </Box>
-            )}
         </Box>
     );
 }

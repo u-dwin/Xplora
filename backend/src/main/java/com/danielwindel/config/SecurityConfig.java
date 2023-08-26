@@ -25,7 +25,6 @@ public class SecurityConfig {
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic();
-
         return httpSecurity.build();
     }
 
