@@ -25,15 +25,15 @@ public class AuthenticationService {
                .build();
     }
 
-    public AuthenticationResponse authenticate(UserAuthDTO userAuthDTO) {
+    public AuthenticationResponse authenticate(UserDTO userDTO) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        userAuthDTO.getEmail(),
-                        userAuthDTO.getPassword()
+                        userDTO.getUserEmailAddress(),
+                        userDTO.getUserPassword()
                 )
         );
 
-        var jwtToken = jwtService.generateToken(mongoUserDetailService.loadUserByUsername(userAuthDTO.getEmail()));
+        var jwtToken = jwtService.generateToken(mongoUserDetailService.loadUserByUsername(userDTO.getUserEmailAddress()));
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .build();
