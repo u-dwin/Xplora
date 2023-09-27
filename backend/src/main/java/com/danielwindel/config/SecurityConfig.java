@@ -31,8 +31,8 @@ public class SecurityConfig {
         httpSecurity
                 .csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers(HttpMethod.POST, "/api/users/add").permitAll()
-                .requestMatchers(HttpMethod.POST, "/login").permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/user/register").permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/user/authenticate").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement()
