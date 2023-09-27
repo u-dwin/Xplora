@@ -1,6 +1,6 @@
 package com.danielwindel.config;
 
-import com.danielwindel.authentification.JwtAuthenticationFilter;
+import com.danielwindel.authentication.JwtAuthenticationFilter;
 import com.danielwindel.users.MongoUserDetailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

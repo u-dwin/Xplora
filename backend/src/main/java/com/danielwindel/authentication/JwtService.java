@@ -1,4 +1,4 @@
-package com.danielwindel.authentification;
+package com.danielwindel.authentication;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

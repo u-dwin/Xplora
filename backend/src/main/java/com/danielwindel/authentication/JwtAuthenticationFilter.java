@@ -1,4 +1,4 @@
-package com.danielwindel.authentification;
+package com.danielwindel.authentication;
 
 import com.danielwindel.users.MongoUserDetailService;
 import jakarta.servlet.FilterChain;
