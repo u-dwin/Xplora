@@ -17,7 +17,7 @@ import java.util.function.Function;
 @Service
 public class JwtService {
 
-    private static final String JWT_SIGNING_KEY = "${JWT_SIGNING_KEY}";
+    private static final String JWT_SIGNING_KEY = System.getenv("JWT_SIGNING_KEY");
 
     private Claims extractAllClaims(String token) {
         return Jwts.parserBuilder()
