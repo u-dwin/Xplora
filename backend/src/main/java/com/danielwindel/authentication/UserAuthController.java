@@ -1,5 +1,6 @@
 package com.danielwindel.authentication;
 
+import com.danielwindel.users.UserDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,15 +13,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/user")
 public class UserAuthController {
 
+    private final AuthenticationService authenticationService;
+
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponse> register(
-            @RequestBody UserAuthDTO userAuthDTO){
-        return null;
+            @RequestBody UserDTO userDTO){
+        return ResponseEntity.ok(authenticationService.register(userDTO));
     }
 
     @PostMapping("/authenticate")
     public ResponseEntity<AuthenticationResponse> login(
             @RequestBody UserAuthDTO userAuthDTO){
-        return null;
+        return ResponseEntity.ok(authenticationService.authenticate(userAuthDTO));
     }
 }
