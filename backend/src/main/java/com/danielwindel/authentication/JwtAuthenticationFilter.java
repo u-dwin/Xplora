@@ -34,12 +34,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         final String jwtToken;
         final String userEmail;
 
-        if (authHeader == null || authHeader.startsWith("Bearer ")) {
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             filterChain.doFilter(request, response);
+            System.out.println(authHeader);
             return;
         }
         jwtToken = authHeader.substring(7);
         userEmail = jwtService.extractUsername(jwtToken);
+        System.out.println(jwtToken);
+        System.out.println(userEmail);
 
         if(userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null){
             UserDetails userDetails = this.mongoUserDetailService.loadUserByUsername(userEmail);
