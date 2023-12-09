@@ -1,6 +1,5 @@
 package com.danielwindel.users;
 
-import com.danielwindel.authentication.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +11,6 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
-    private final JwtService jwtService;
 
     @PutMapping("/profile/{id}")
     @ResponseBody
