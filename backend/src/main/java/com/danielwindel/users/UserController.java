@@ -1,5 +1,6 @@
 package com.danielwindel.users;
 
+import com.danielwindel.authentication.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,11 +12,7 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
-
-    @PostMapping("/add")
-    public User addUser(@RequestBody UserDTO userRequestModel) {
-        return userService.addUser(userRequestModel);
-    }
+    private final JwtService jwtService;
 
     @PutMapping("/profile/{id}")
     @ResponseBody

@@ -23,7 +23,7 @@ public class UserAuthController {
 
     @PostMapping("/authenticate")
     public ResponseEntity<AuthenticationResponse> login(
-            @RequestBody UserDTO userDTO){
-        return ResponseEntity.ok(authenticationService.authenticate(userDTO));
+            @RequestBody UserLoginDTO userLoginDTO) {
+        return ResponseEntity.ok(authenticationService.authenticate(userLoginDTO));
     }
 }

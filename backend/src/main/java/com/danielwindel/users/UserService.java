@@ -16,9 +16,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserService {
     private final PasswordEncoder passwordEncoder;
-
     private final UserRepository userRepository;
-
     private final UserProfileRepository userProfileRepository;
     private final IdService idService;
 

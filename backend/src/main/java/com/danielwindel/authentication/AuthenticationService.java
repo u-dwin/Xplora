@@ -6,6 +6,7 @@ import com.danielwindel.users.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,26 +15,31 @@ public class AuthenticationService {
 
     private final UserService userService;
     private final JwtService jwtService;
-    private final MongoUserDetailService mongoUserDetailService;
     private final AuthenticationManager authenticationManager;
+    private final MongoUserDetailService mongoUserDetailService;
 
     public AuthenticationResponse register(UserDTO userDTO) {
        userService.addUser(userDTO);
-       var jwtToken = jwtService.generateToken(mongoUserDetailService.loadUserByUsername(userDTO.getUserEmailAddress()));
+        UserDetails user = mongoUserDetailService.loadUserByUsername(userDTO.getUserEmailAddress());
+
+        var jwtToken = jwtService.generateToken(user);
        return AuthenticationResponse.builder()
                .token(jwtToken)
                .build();
     }
 
-    public AuthenticationResponse authenticate(UserDTO userDTO) {
+    public AuthenticationResponse authenticate(UserLoginDTO userLoginDTO) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        userDTO.getUserEmailAddress(),
-                        userDTO.getUserPassword()
+                        userLoginDTO.getUserEmailAddress(),
+                        userLoginDTO.getUserPassword()
                 )
         );
 
-        var jwtToken = jwtService.generateToken(mongoUserDetailService.loadUserByUsername(userDTO.getUserEmailAddress()));
+        UserDetails user = mongoUserDetailService.loadUserByUsername(userLoginDTO.getUserEmailAddress()
+        );
+
+        var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .build();
