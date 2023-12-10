@@ -1,6 +1,7 @@
 package com.danielwindel.authentication;
 
 import com.danielwindel.users.MongoUserDetailService;
+import com.danielwindel.users.User;
 import com.danielwindel.users.UserDTO;
 import com.danielwindel.users.UserService;
 import lombok.RequiredArgsConstructor;
@@ -19,10 +20,10 @@ public class AuthenticationService {
     private final MongoUserDetailService mongoUserDetailService;
 
     public AuthenticationResponse register(UserDTO userDTO) {
-       userService.addUser(userDTO);
-        UserDetails user = mongoUserDetailService.loadUserByUsername(userDTO.getUserEmailAddress());
+        User user = userService.addUser(userDTO);
+        UserDetails userDetails = mongoUserDetailService.loadUserByUsername(user.getUserId());
 
-        var jwtToken = jwtService.generateToken(user);
+        var jwtToken = jwtService.generateToken(userDetails);
        return AuthenticationResponse.builder()
                .token(jwtToken)
                .build();

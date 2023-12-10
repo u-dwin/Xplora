@@ -3,6 +3,7 @@ package com.danielwindel.users;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -14,7 +15,10 @@ public class UserController {
 
     @PutMapping("/profile/{id}")
     @ResponseBody
-    public UserProfile editUserDetails(@PathVariable String id, @RequestBody UserProfileDTO userProfileDTO) {
+    public UserProfile editUserDetails(@PathVariable String id, @RequestBody UserProfileDTO userProfileDTO, Principal principal) {
+        if (!id.equals(principal.getName())) {
+            throw new IllegalArgumentException("User not authorized to edit this profile");
+        }
         return userService.editUserDetails(userProfileDTO, id);
     }
 
